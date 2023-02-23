@@ -57,17 +57,21 @@
 
 {% block body %}
 
-    <div class="container-fluid border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+    <div class="container-fluid border bg-body-tertiary mx-auto my-3 h-100 rounded-3">
         <p class="h5 mt-3">Trending movies this week</p>   
         {% for i in range(6) %}
-        <div class="card p-0 mx-2 my-3" style="width: 12rem;">
-            <img src="http://image.tmdb.org/t/p/w342/{{ trending_movs[i]['poster_path'] }}" class="card-img-top" alt="Poster">
-            <div class="card-body">
-                <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
-                <p class="card-text">{{  "%0.1f" | format(trending_movs[i]["vote_average"]) }}</p>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+        <div class="row">
+            <div class="col-4">
+                <div class="card p-0 mx-2 my-3" style="width: 12rem;">
+                    <img src="http://image.tmdb.org/t/p/w342/{{ trending_movs[i]['poster_path'] }}" class="card-img-top" alt="Poster">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
+                        <p class="card-text">{{  "%0.1f" | format(trending_movs[i]["vote_average"]) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
