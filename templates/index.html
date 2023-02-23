@@ -64,9 +64,11 @@
         <div class="card p-0 m-2" style="width: 12rem;">
             <img src="http://image.tmdb.org/t/p/w342/{{ trending_movs[i]['poster_path'] }}" class="card-img-top w-100" alt="Poster">
             <div class="card-body">
-            <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
-            <p class="card-text">{{ trending_movs[i]["vote_average"] }}</p>
-            <a href="#" class="btn btn-primary btn-sm">Wishlist</a>
+                <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
+                <p class="card-text">{{ trending_movs[i]["vote_average"] }}</p>
+                <div class="h-25 d-flex flex-row align-items-end">
+                    <button class="btn btn-primary btn-sm align-self-end">Wishlist</button>
+                </div>
             </div>
         </div>
         {% endfor %}
