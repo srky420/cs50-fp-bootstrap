@@ -4,69 +4,102 @@
 
 {% block banner %}
 <!-- Carousel -->
+<div class="container my-3">
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
 
-    <!-- Indicators/dots -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner rounded-3">
+            <div class="carousel-item active">
+                <img src="http://image.tmdb.org/t/p/w1280/{{ slides[0]['backdrop_path'] }}" alt="Slide1"
+                    class="d-block w-100" style="height: 500px; object-fit:cover; object-position: top;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="text-info">{{ slides[0]["title"] }}</h5>
+                    <p>{{ slides[0]["overview"] }}</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="http://image.tmdb.org/t/p/w1280/{{ slides[1]['backdrop_path'] }}" alt="Slide2"
+                    class="d-block w-100" style="height: 500px; object-fit:cover; object-position: top;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="text-info">{{ slides[1]["title"] }}</h5>
+                    <p>{{ slides[1]["overview"] }}</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="http://image.tmdb.org/t/p/w1280/{{ slides[2]['backdrop_path'] }}" alt="Slide3"
+                    class="d-block w-100" style="height: 500px; object-fit:cover; object-position: top;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="text-info">{{ slides[2]["title"] }}</h5>
+                    <p>{{ slides[2]["overview"] }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
-
-    <!-- The slideshow/carousel -->
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="http://image.tmdb.org/t/p/w1280/{{ slides[0]['backdrop_path'] }}" alt="Los Angeles"
-                class="d-block w-100" style="height: 500px; min-width: 99vw; object-fit:cover;">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-info">{{ slides[0]["title"] }}</h5>
-                <p>{{ slides[0]["overview"] }}</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="http://image.tmdb.org/t/p/w1280/{{ slides[1]['backdrop_path'] }}" alt="Chicago"
-                class="d-block w-100" style="height: 500px; min-width: 99vw; object-fit:cover;">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-info">{{ slides[1]["title"] }}</h5>
-                <p>{{ slides[1]["overview"] }}</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="http://image.tmdb.org/t/p/w1280/{{ slides[2]['backdrop_path'] }}" alt="New York"
-                class="d-block w-100" style="height: 500px; min-width: 99vw; object-fit:cover;">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-info">{{ slides[2]["title"] }}</h5>
-                <p>{{ slides[2]["overview"] }}</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Left and right controls/icons -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
 </div>
-
-
 <!-- Movies Cards -->
 
 {% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid bg-body-tertiary mt-3 row">
-        <p class="h5">Trending this week</p>   
-        {% for i in range(5) %}
-        <div class="card p-0 m-2" style="width: 12rem;">
-            <img src="http://image.tmdb.org/t/p/w342/{{ trending_movs[i]['poster_path'] }}" class="card-img-top w-100" alt="Poster">
+    <div class="container-fluid border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+        <p class="h5 mt-3">Trending movies this week</p>   
+        {% for i in range(6) %}
+        <div class="card p-0 mx-2 my-3" style="width: 12rem;">
+            <img src="http://image.tmdb.org/t/p/w342/{{ trending_movs[i]['poster_path'] }}" class="card-img-top" alt="Poster">
             <div class="card-body">
-            <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
-            <p class="card-text">{{ trending_movs[i]["vote_average"] }}</p>
-            <a href="#" class="btn btn-primary btn-sm">Wishlist</a>
+                <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
+                <p class="card-text">{{  "%0.1f" | format(trending_movs[i]["vote_average"]) }}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container-fluid border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+        <p class="h5 mt-3">Trending shows this week</p>   
+        {% for i in range(6) %}
+        <div class="card p-0 mx-2 my-3" style="width: 12rem;">
+            <img src="http://image.tmdb.org/t/p/w342/{{ trending_shows[i]['poster_path'] }}" class="card-img-top" alt="Poster">
+            <div class="card-body">
+                <h6 class="card-title">{{ trending_shows[i]["name"] }}</h6>
+                <p class="card-text">{{  "%0.1f" | format(trending_shows[i]["vote_average"]) }}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container-fluid border bg-body-tertiary mx-auto my-3 row h-100">
+        <p class="h5 mt-3">Trending shows this week</p>   
+        {% for i in range(6) %}
+        <div class="card p-0 mx-2 my-3" style="width: 12rem;">
+            <img src="http://image.tmdb.org/t/p/w342/{{ trending_shows[i]['poster_path'] }}" class="card-img-top" alt="Poster">
+            <div class="card-body">
+                <h6 class="card-title">{{ trending_shows[i]["name"] }}</h6>
+                <p class="card-text">{{  "%0.1f" | format(trending_shows[i]["vote_average"]) }}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-dark btn-sm">Wishlist</button>
             </div>
         </div>
         {% endfor %}
