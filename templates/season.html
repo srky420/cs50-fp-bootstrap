@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %} Season {% endblock %}
+
+{% block body %}
+
+    <!-- Show details -->
+
+    <div class="full-info">
+
+        <div class="poster"><img src="http://image.tmdb.org/t/p/w500/{{ info['poster_path'] }}" alt="Poster"></div>
+        <div class="info-main">
+
+            <p class="heading">{{ title }} : {{ info["name"] }}</p>
+            <p class="text-g">Season number: {{ info["season_number"] }}</p>
+            <p class="text-g">Air Date: {{ info["air_date"] }}</p>
+        </div>
+    </div>
+
+    <!-- Seasons Cards -->
+
+    <div class="cards">
+        <p class="heading cards-heading">Episodes</p>
+        <div class="cards-list-y">
+
+            {% for episode in info["episodes"] %}
+
+                {% if episode['still_path'] %}
+
+                <div class="card-x episode-info">
+                    <img class="still-img" src="http://image.tmdb.org/t/p/w300/{{ episode['still_path'] }}" alt="Poster">
+                    <div class="info-x">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg> {{ "%0.1f" | format(episode["vote_average"]) }}
+                        </div>
+                        <b class="text-w">{{ episode["name"] }}</b>
+
+                        {% if episode["overview"] %}
+                        
+                        <p class="text-w">Overview: {{ episode["overview"] }} </p>
+
+                        {% endif %}
+                        
+                        <p class="text-w">Runtime: {{ episode["runtime"] }}</p>
+
+                    </div>
+                </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
