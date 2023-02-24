@@ -235,7 +235,7 @@ def logout():
     
     
 # REGISTER ROUTE
-@app.route("/signup", methods=["POST"])
+@app.route("/signup", methods=["GET", "POST"])
 def register():
     # POST
     if request.method == "POST":
