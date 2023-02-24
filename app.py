@@ -213,7 +213,7 @@ def login():
         
         if len(user) != 1 or not check_password_hash(user[0].password, password):
             flash("Invalid username or password!", "error")
-            return redirect("/registration")
+            return redirect("/login")
         
         # Set session var
         session["user_id"] = user[0].id
