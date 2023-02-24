@@ -192,43 +192,36 @@ def search_rt():
     return jsonify(response)
 
 
-# REGISTRATION ROUTE
-@app.route("/registration")
-def registration():
-    # If already logged in
-    if session.get("user_id"):
-        flash("Already logged in!", "neutral")
+# LOGIN ROUTE
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    # POST
+    if request.method == "POST":
+    # Clear session
+        session.clear()
+        
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        # Check for input
+        if not username or not password:
+            flash("Invalid username or password!", "error")
+            return redirect("/registration")
+        
+        # Check if user exists
+        user = Users.query.filter_by(username = username).all()
+        
+        if len(user) != 1 or not check_password_hash(user[0].password, password):
+            flash("Invalid username or password!", "error")
+            return redirect("/registration")
+        
+        # Set session var
+        session["user_id"] = user[0].id
+        
+        flash("Logged in!", "success")
         return redirect("/")
     
-    return render_template("registration.html")
-
-
-# LOGIN ROUTE
-@app.route("/login", methods=["POST"])
-def login():
-    # Clear session
-    session.clear()
-    
-    username = request.form.get("username")
-    password = request.form.get("password")
-
-    # Check for input
-    if not username or not password:
-        flash("Invalid username or password!", "error")
-        return redirect("/registration")
-    
-    # Check if user exists
-    user = Users.query.filter_by(username = username).all()
-    
-    if len(user) != 1 or not check_password_hash(user[0].password, password):
-        flash("Invalid username or password!", "error")
-        return redirect("/registration")
-    
-    # Set session var
-    session["user_id"] = user[0].id
-    
-    flash("Logged in!", "success")
-    return redirect("/")
+    return render_template("login.html")
     
     
 # LOGOUT ROUTE 
@@ -236,45 +229,49 @@ def login():
 def logout():
     # Clear session
     session.clear()
-    
     flash("Logged out!", "neutral")
     
     return redirect("/")
     
     
 # REGISTER ROUTE
-@app.route("/register", methods=["POST"])
+@app.route("/signup", methods=["POST"])
 def register():
-    username = request.form.get("username")
-    password = request.form.get("password")
-    confirmation = request.form.get("confirmation")
-    
-    # Check input
-    if not username or not password or not confirmation:
-        flash("Invalid username or password!", "error")
-        return redirect("/registration")
-    elif password != confirmation:
-        flash("Passwords don't match!", "error")
-        return redirect("/registration")
-    
-    # Check if username already exists
-    users = Users.query.filter_by(username = username).all()
-    
-    if len(users) != 0:
-        flash("Username already exists!", "error")
-        return redirect("/registration")
-    
-    # Create a user
-    user = Users(username, generate_password_hash(password))
+    # POST
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
         
-    # Add user to db
-    db.session.add(user)
-    db.session.commit()
-    
-    session["user_id"] = user.id
-    
-    flash("Account registered!", "success")
-    return redirect("/")
+        # Check input
+        if not username or not password or not confirmation:
+            flash("Invalid username or password!", "error")
+            return redirect("/registration")
+        elif password != confirmation:
+            flash("Passwords don't match!", "error")
+            return redirect("/registration")
+        
+        # Check if username already exists
+        users = Users.query.filter_by(username = username).all()
+        
+        if len(users) != 0:
+            flash("Username already exists!", "error")
+            return redirect("/signup")
+        
+        # Create a user
+        user = Users(username, generate_password_hash(password))
+            
+        # Add user to db
+        db.session.add(user)
+        db.session.commit()
+        
+        session["user_id"] = user.id
+        
+        flash("Account registered!", "success")
+        return redirect("/")
+
+    # GET
+    return render_template("signup.html")
 
 
 # PROFILE ROUTE
