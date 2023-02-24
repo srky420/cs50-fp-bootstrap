@@ -28,14 +28,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     var title = result[id].title.replace('<', '&lt;').replace('&', '&amp;');
 
                     // Using backticks and curly braces format
-                    html += `<option value="${title}"></option>`;
+                    html += `<option onclick="window.location.href = '/movie/${result[id]["id"]}';">${title}</option>`;
                 }
                 else if (result[id].media_type == 'tv') {
 
                     var title = result[id].name.replace('<', '&lt;').replace('&', '&amp;');
 
                     // Using backticks and curly braces format
-                    html += `<option value="${title}"></option>`;
+                    html += `<option onclick="window.location.href = '/movie/${result[id]["id"]}';">${title}</option>`;
                         
                 }
             }
