@@ -17,8 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // Show max 7 results
         result = result.slice(0, 7);
 
-        console.log(result);
-
         // Create appropriate HTML
         for (var id in result) {
 
@@ -30,14 +28,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     var title = result[id].title.replace('<', '&lt;').replace('&', '&amp;');
 
                     // Using backticks and curly braces format
-                    html += `<option value="${title}">${title}</option>`;
+                    html += `<option value="${title}"></option>`;
                 }
                 else if (result[id].media_type == 'tv') {
 
                     var title = result[id].name.replace('<', '&lt;').replace('&', '&amp;');
 
                     // Using backticks and curly braces format
-                    html += `<option value="${title}">${title}</option>`;
+                    html += `<option value="${title}"></option>`;
                         
                 }
             }
@@ -45,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         console.log(html)
 
-        document.querySelector('#searchList').innerHTML = html;
+        document.querySelector('#searchListOptions').innerHTML = html;
 
     });
 
