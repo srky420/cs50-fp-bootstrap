@@ -7,7 +7,7 @@
 <div class="container my-3">
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
-        <!-- Indicators/dots -->
+        <!-- Indicators -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
@@ -20,7 +20,7 @@
                 <img src="http://image.tmdb.org/t/p/w1280/{{ slides[0]['backdrop_path'] }}" alt="Slide1"
                     class="d-block w-100" style="height: 500px; object-fit:cover; object-position: top;">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 class="text-info">{{ slides[0]["title"] }}</h5>
+                    <h4 class="text-info">{{ slides[0]["title"] }}</h4>
                     <p>{{ slides[0]["overview"] }}</p>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <img src="http://image.tmdb.org/t/p/w1280/{{ slides[1]['backdrop_path'] }}" alt="Slide2"
                     class="d-block w-100" style="height: 500px; object-fit:cover; object-position: top;">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 class="text-info">{{ slides[1]["title"] }}</h5>
+                    <h4 class="text-info">{{ slides[1]["title"] }}</h4>
                     <p>{{ slides[1]["overview"] }}</p>
                 </div>
             </div>
@@ -36,13 +36,13 @@
                 <img src="http://image.tmdb.org/t/p/w1280/{{ slides[2]['backdrop_path'] }}" alt="Slide3"
                     class="d-block w-100" style="height: 500px; object-fit:cover; object-position: top;">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 class="text-info">{{ slides[2]["title"] }}</h5>
+                    <h4 class="text-info">{{ slides[2]["title"] }}</h4>
                     <p>{{ slides[2]["overview"] }}</p>
                 </div>
             </div>
         </div>
 
-        <!-- Left and right controls/icons -->
+        <!-- Left and right controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
@@ -51,12 +51,10 @@
         </button>
     </div>
 </div>
+{% endblock %}
 <!-- Movies Cards -->
 
-{% endblock %}
-
 {% block body %}
-
 <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
     <p class="h5 mt-3">Trending movies this week</p>
     <div class="row g-3">
@@ -119,5 +117,4 @@
     {% endfor %}
     </div>
 </div>
-
 {% endblock %}
