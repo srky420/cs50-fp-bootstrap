@@ -221,6 +221,7 @@ def login():
         flash("Logged in!", "success")
         return redirect("/")
     
+    # GET
     return render_template("login.html")
     
     

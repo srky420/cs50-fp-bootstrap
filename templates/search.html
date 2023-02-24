@@ -5,18 +5,18 @@
 {% block body %}
 
 <!-- Search result cards -->
-<div class="container w-75 my-5 bg-body-tertiary border rounded-3 h-100">
+<div class="container my-5 bg-body-tertiary border rounded-3 h-100">
     <p class="h5 text-muted my-3">Search result for "{{ title }}":</p>
     <!-- Filter only movies and tv shows having a poster -->
     {% for result in response["results"] %}
     {% if (result["media_type"] == "movie" or result["media_type"] == "tv") and result["poster_path"] %}
     <div class="card mb-3 w-100 my-3">
         <div class="row g-0">
-            <div class="col-4 col-md-3 col-lg-2 my-auto">
+            <div class="col-4 col-md-2 col-lg-1 my-auto">
                 <img src="http://image.tmdb.org/t/p/w500/{{ result['poster_path'] }}" class="img-thumbnail rounded-start"
                     alt="Poster">
             </div>
-            <div class="col-7 col-md-6 col-lg-3">
+            <div class="col-8 col-md-6 col-lg-4">
                 <div class="card-body">
                     {% if result["title"] %}
                     <a class="card-title text-decoration-none" href=""> {{ result["title"] }}</a>
@@ -59,144 +59,180 @@
 
 
 <!-- Pagination -->
-
-<div class="pagination">
-
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
     {% if response["total_pages"] > 4 %}
 
-    <!-- First page condition -->
-    {% if response["page"] == 1 %}
+        <!-- First page condition -->
+        {% if response["page"] == 1 %}
 
-    <a href="#" id="active-link">1</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 2 }}">{{ response["page"] + 2 }}</a>
-    <p class="text-g">...</p>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item active"><a href="#" class="page-link">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 2 }}">{{ response["page"] + 2 }}</a></li>
+        <li class="page-item">
+            <p class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </p>
+        </li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Last page condition -->
-    {% elif response["page"] == response["total_pages"] %}
+        <!-- Last page condition -->
+        {% elif response["page"] == response["total_pages"] %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <p class="text-g">...</p>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 2 }}">{{ response["page"] - 2 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a>
-    <a href="#" id="active-link">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item">
+            <p class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </p>
+        </li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 2 }}">{{ response["page"] - 2 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["total_pages"] }}</a></li>
 
-    <!-- Second page condition -->
-    {% elif response["page"] - 1 == 1 %}
+        <!-- Second page condition -->
+        {% elif response["page"] - 1 == 1 %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="#" id="active-link">{{ response["page"] }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 2 }}">{{ response["page"] + 2 }}</a>
-    <p class="text-g">...</p>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["page"] }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 2 }}">{{ response["page"] + 2 }}</a></li>
+        <li class="page-item">
+            <p class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </p>
+        </li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Second last page condition -->
-    {% elif response["page"] + 1 == response["total_pages"] %}
+        <!-- Second last page condition -->
+        {% elif response["page"] + 1 == response["total_pages"] %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <p class="text-g">...</p>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 2 }}">{{ response["page"] - 2 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a>
-    <a href="#" id="active-link">{{ response["page"] }}</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item">
+            <p class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </p>
+        </li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 2 }}">{{ response["page"] - 2 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["page"] }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Middle page condition -->
-    {% else %}
+        <!-- Middle page condition -->
+        {% else %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <p class="text-g">...</p>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a>
-    <a href="#" id="active-link">{{ response["page"] }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a>
-    <p class="text-g">...</p>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item">
+            <p class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </p>
+        </li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["page"] }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a></li>
+        <li class="page-item">
+            <p class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </p>
+        </li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    {% endif %}
+        {% endif %}
 
     <!-- For 4 pages -->
     {% elif response["total_pages"] == 4 %}
 
-    <!-- First page condition -->
-    {% if response["page"] == 1 %}
+        <!-- First page condition -->
+        {% if response["page"] == 1 %}
 
-    <a href="#" id="active-link">1</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 2 }}">{{ response["page"] + 2 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 2 }}">{{ response["page"] + 2 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Last page condition -->
-    {% elif response["page"] == response["total_pages"] %}
+        <!-- Last page condition -->
+        {% elif response["page"] == response["total_pages"] %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 2 }}">{{ response["page"] - 2 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a>
-    <a href="#" id="active-link">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 2 }}">{{ response["page"] - 2 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["total_pages"] }}</a></li>
 
-    <!-- Second page condition -->
-    {% elif response["page"] - 1 == 1 %}
+        <!-- Second page condition -->
+        {% elif response["page"] - 1 == 1 %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="#" id="active-link">{{ response["page"] }}</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["page"] }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Second last page condition -->
-    {% elif response["page"] + 1 == response["total_pages"] %}
+        <!-- Second last page condition -->
+        {% elif response["page"] + 1 == response["total_pages"] %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a>
-    <a href="#" id="active-link">{{ response["page"] }}</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["page"] }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    {% endif %}
+        {% endif %}
 
     <!-- For 3 pages -->
     {% elif response["total_pages"] == 3 %}
 
     <!-- First page condition -->
-    {% if response["page"] == 1 %}
+        {% if response["page"] == 1 %}
 
-    <a href="#" id="active-link">1</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] + 1 }}">{{ response["page"] + 1 }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Second page condition -->
-    {% elif response["page"] - 1 == 1 %}
+        <!-- Second page condition -->
+        {% elif response["page"] - 1 == 1 %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="#" id="active-link">{{ response["page"] }}</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["page"] }}</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Last page condition -->
-    {% else %}
+        <!-- Last page condition -->
+        {% else %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a>
-    <a href="#" id="active-link">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['page'] - 1 }}">{{ response["page"] - 1 }}</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["total_pages"] }}</a></li>
 
-    {% endif %}
+        {% endif %}
 
     <!-- For 2 pages -->
     {% elif response["total_pages"] == 2 %}
 
-    <!-- First page condition -->
-    {% if response["page"] == 1 %}
+        <!-- First page condition -->
+        {% if response["page"] == 1 %}
 
-    <a href="#" id="active-link">1</a>
-    <a href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page={{ response['total_pages'] }}">{{ response["total_pages"] }}</a></li>
 
-    <!-- Last page condition -->
-    {% else %}
+        <!-- Last page condition -->
+        {% else %}
 
-    <a href="/search?search={{ title }}&page=1">1</a>
-    <a href="#" id="active-link">{{ response["total_pages"] }}</a>
+        <li class="page-item"><a class="page-link" href="/search?search={{ title }}&page=1">1</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ response["total_pages"] }}</a></li>
+
+        {% endif %}
 
     {% endif %}
 
-    {% endif %}
-
-</div>
+    </ul>
+</nav>
 
 {% endblock %}
