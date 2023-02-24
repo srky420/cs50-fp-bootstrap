@@ -28,12 +28,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse nav-right" id="collapsibleNavId">
-                <form class="d-flex ms-auto">
+                <form class="d-flex ms-auto" action="/search" method="get">
                     <div class="input-group">
                         <input class="form-control rounded-0" list="searchListOptions" name="search" id="search" placeholder="Search..." autocomplete="off">
                             <datalist id="searchListOptions">
                             
                             </datalist>
+                        <input type="hidden" name="page" value="1">
                         <button class="btn btn-light rounded-0" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
