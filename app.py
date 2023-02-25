@@ -130,6 +130,7 @@ def movie(id):
             added.append(movie.movie_id)
     
     similar_movies = get_similar_movies(id)
+    similar_movies = similar_movies["results"]
     return render_template("movie.html", info=info, similar_movies=similar_movies, is_added=is_added, added=added, username=username)
 
 
