@@ -73,6 +73,7 @@
         <p class="h5 mt-3">Similar movies</p>
         <div class="row g-3">
             {% for i in range(6) %}
+            {% if similar_movies[i] %}
             <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="card h-100 w-100">
                     <img src="http://image.tmdb.org/t/p/w500/{{ similar_movies[i]['poster_path'] }}" class="card-img-top"
@@ -91,6 +92,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
