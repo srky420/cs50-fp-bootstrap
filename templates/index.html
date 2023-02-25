@@ -77,7 +77,15 @@
                             </svg>
                             {{ "%0.1f" | format(trending_movs[i]["vote_average"]) }}
                         </p>
-                        <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+                        {% if trending_movs[i]["id"] not in added_movies %}
+                        <form action="/add-movie/{{ trending_movs[i]['id'] }}" method="post">
+                            <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                        </form>
+                        {% else %}
+                        <form action="/remove-movie/{{ trending_movs[i]['id'] }}" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -106,7 +114,7 @@
                             </svg>
                             {{ "%0.1f" | format(trending_shows[i]["vote_average"]) }}
                         </p>
-                        <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+                        <button class="btn btn-outline-dark btn-sm">Watchlist</button>
                     </div>
                 </div>
             </div>
@@ -134,7 +142,7 @@
                             </svg>
                             {{ "%0.1f" | format(trending_shows[i]["vote_average"]) }}
                         </p>
-                        <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+                        <button class="btn btn-outline-dark btn-sm">Watchlist</button>
                     </div>
                 </div>
             </div>

@@ -62,7 +62,7 @@
                     </form>
                     {% else %}
                     <form action="/remove-movie/{{ info['id'] }}" method="post">
-                        <button class="btn watchlist-btn" type="submit">
+                        <button class="btn btn-outline-danger" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-dash-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -99,7 +99,15 @@
                             </svg>
                             {{ "%0.1f" | format(similar_movies[i]["vote_average"]) }}
                         </p>
-                        <button class="btn btn-outline-dark btn-sm">Wishlist</button>
+                        {% if similar_movies[i]["id"] not in added %}
+                        <form action="/add-movie/{{ similar_movies[i]['id'] }}" method="post">
+                            <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                        </form>
+                        {% else %}
+                        <form action="/remove-movie/{{ similar_movies[i]['id'] }}" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
                     <p class="card-text">Manage movies you have added to watchlist or add movies if haven't already.</p>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-outline-dark text-center" href="/logout">Logout</a>
+                    <a class="btn btn-outline-danger text-center" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-sm btn-outline-dark">Login</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-dark">Change Password</button>
                                 </div>
                             </div>
                         </form>
@@ -62,6 +62,26 @@
 </div>
 
     <!-- Up next list -->
+<div class="container my-3 p-3 bg-body-tertiary border rounded-3">
+    {% if movies_list %}
+    <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-2">
+            <img src="http://image.tmdb.org/t/p/w500/{{ movies_list[0]['poster_path'] }}" alt="Poster"
+            onclick="this.submit();" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
 
     <div class="up-next card-list-y">
         <p class="heading">Up next</p>
