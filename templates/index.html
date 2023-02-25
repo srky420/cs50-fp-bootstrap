@@ -52,19 +52,19 @@
     </div>
 </div>
 {% endblock %}
-<!-- Movies Cards -->
 
+<!-- Movies Cards -->
 {% block body %}
 <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
     <p class="h5 mt-3">Trending movies this week</p>
     <div class="row g-3">
         {% for i in range(6) %}
-        <div class="col-12 col-md-4 col-lg-2 mb-3">
+        <div class="col-8 col-md-4 col-lg-2 mb-3">
             <div class="card h-100 w-100">
                 <img src="http://image.tmdb.org/t/p/w500/{{ trending_movs[i]['poster_path'] }}" class="card-img-top"
                     alt="Poster">
                 <div class="card-body">
-                    <h6 class="card-title">{{ trending_movs[i]["title"] }}</h6>
+                    <a class="card-title h6 text-decoration-none" href="/movie/{{ trending_movs[i]['id'] }}">{{ trending_movs[i]["title"] }}</a>
                 </div>
                 <div class="card-footer">
                     <p class="card-text">
