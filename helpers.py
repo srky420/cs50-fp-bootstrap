@@ -11,7 +11,7 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
             flash("Login required!", "error")
-            return redirect("/registration")
+            return redirect("/login")
         
         return f(*args, **kwargs)
     return decorated_function
@@ -47,6 +47,23 @@ def trending_shows_weekly():
 
     # Parse response
     return parse_response(response)
+
+
+# Get popular movies
+def get_popular_movies():
+
+    # Contacting the API
+    try:
+        apikey = os.environ.get("API_KEY")
+        url = f"https://api.themoviedb.org/3/movie/popular?api_key={apikey}&language=en-US"
+        response = requests.get(url)
+        response.raise_for_status
+    except requests.RequestException:
+        return None
+
+    # Parse response
+    return parse_response(response)
+
 
 
 # Get movie details

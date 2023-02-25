@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, session, jsonify
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_main_posters, get_season
+from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_main_posters, get_season, get_popular_movies
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
 import urllib.parse
@@ -77,6 +77,10 @@ def index():
     # Get trending shows
     trending_shows = trending_shows_weekly()
     trending_shows = trending_shows["results"]
+    
+    # Get popular movies
+    popular_movies = get_popular_movies()
+    popular_movies = popular_movies["results"]
      
     # Get username
     user = Users.query.filter_by(id = session.get("user_id")).all()
@@ -99,7 +103,8 @@ def index():
     slides = get_main_posters()
     
     return render_template(
-        "index.html", trending_movs=trending_movs, trending_shows=trending_shows, username=username, slides=slides, added_movies=added_movies, added_shows=added_shows
+        "index.html", trending_movs=trending_movs, trending_shows=trending_shows, username=username, 
+        slides=slides, added_movies=added_movies, added_shows=added_shows, popular_movies=popular_movies
         )
 
 
@@ -207,7 +212,7 @@ def login():
         # Check for input
         if not username or not password:
             flash("Invalid username or password!", "error")
-            return redirect("/registration")
+            return redirect("/login")
         
         # Check if user exists
         user = Users.query.filter_by(username = username).all()
@@ -248,10 +253,10 @@ def register():
         # Check input
         if not username or not password or not confirmation:
             flash("Invalid username or password!", "error")
-            return redirect("/registration")
+            return redirect("/signup")
         elif password != confirmation:
             flash("Passwords don't match!", "error")
-            return redirect("/registration")
+            return redirect("/signup")
         
         # Check if username already exists
         users = Users.query.filter_by(username = username).all()
@@ -276,6 +281,37 @@ def register():
     return render_template("signup.html")
 
 
+# CHANGE PASSWORD ROUTE
+@app.route("/change-password", methods=["POST"])
+def change_password():
+    # Get input
+    password = request.form.get("password")
+    confirmation = request.form.get("confirmation")
+    
+    # Check input
+    if not password or not confirmation:
+        flash("Invalid password!", "error")
+        return redirect("/profile")
+    elif password != confirmation:
+        flash("Passwords don't match!", "error")
+        return redirect("/profile")
+    
+    # Get user
+    user = Users.query.filter_by(id = session.get("user_id")).all()
+    
+    if len(user) != 1:
+        flash("Error updating password", "error")
+        return redirect("/profile")
+    
+    # Update password
+    user[0].password = generate_password_hash(password)
+    db.session.commit()
+    
+    session.clear()
+    flash("Password updated successfully!", "success")
+    return redirect("/login")
+
+
 # PROFILE ROUTE
 @app.route("/profile")
 @login_required
@@ -289,19 +325,21 @@ def profile():
     movies = Movies.query.filter_by(user_id = user[0].id).all()
     movies_list = []
     
-    # Get each movie using movie_id and append details to movies_list[]
-    for movie in movies:
-        movies_list.append(get_movie(movie.movie_id))
-    
-    num_of_movies = len(movies_list)
-    
-    # Get user's shows
+     # Get user's shows
     shows = Shows.query.filter_by(user_id = user[0].id).all()
     shows_list = []
     
+    # Get each movie using movie_id and append details to movies_list[]
+    for movie in movies:
+        info = get_movie(movie.movie_id)
+        movies_list.append(info)
+    
+    num_of_movies = len(movies_list)
+    
     # Get each show using show_id and append to shows_list[]
     for show in shows:
-        shows_list.append(get_show(show.show_id))
+        info = get_show(show.show_id)
+        shows_list.append(info)
         
     num_of_shows = len(shows_list)
         
