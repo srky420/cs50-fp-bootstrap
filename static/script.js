@@ -45,23 +45,39 @@ window.addEventListener('DOMContentLoaded', () => {
 
         document.querySelector('#searchListOptions').innerHTML = html;
 
-    });
+    });    
 
-    // Fetch post for movie/show
-    var watchlist_form = document.querySelectorAll('.add-to-watchlist-form');
-    
-    // Add submit event to each form
-    watchlist_form.forEach( (form) => {
+    // Fetch post for adding/removing movies
+    var add_movie_form = document.querySelectorAll('.add-movie-form');
+
+    add_movie_form.forEach( (form) => {
         form.addEventListener('submit', async (e) => {
-            console.log(form.elements[0].value);
-            // Post movie_id to route
+            console.log(form.elements[0].value, 'add');
 
             form.classList.add('form-hidden');
+            console.log(form.nextSibling.nextElementSibling);
+            form.nextSibling.nextElementSibling.classList.remove('form-hidden');
 
             e.preventDefault();
         });
     });
 
+    var remove_movie_form = document.querySelectorAll('.remove-movie-form');
+
+    remove_movie_form.forEach( (form) => {
+        form.addEventListener('submit', async (e) => {
+            console.log(form.elements[0].value, 'remove');
+
+            form.classList.add('form-hidden');
+            console.log(form.previousSibling.previousElementSibling);
+
+            form.previousSibling.previousElementSibling.classList.remove('form-hidden');
+
+
+
+            e.preventDefault();
+        });
+    });
 
 
 });
