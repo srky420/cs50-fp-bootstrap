@@ -47,5 +47,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    // Fetch post for movie/show
+    var watchlist_form = document.querySelectorAll('.add-to-watchlist-form');
+    
+    // Add submit event to each form
+    watchlist_form.forEach( (form) => {
+        form.addEventListener('submit', async (e) => {
+            console.log(form.elements[0].value);
+            // Post movie_id to route
+
+            form.classList.add('form-hidden');
+
+            e.preventDefault();
+        });
+    });
+
+
+
 });
 

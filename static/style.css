@@ -4,6 +4,10 @@
     height: 500px;
 }
 
+.form-hidden {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .poster-img {
         display: none;
