@@ -49,26 +49,29 @@
                     <p>{{ info["overview"] }}</p>
                 </div>
                 <div>
-                    {% if not is_added %}
-                    <form action="/add-show/{{ info['id'] }}" method="post">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                <path
-                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                            </svg> Watchlist
-                        </button>
-                    </form>
+                    {% if session["user_id"] %}
+                        {% if not is_added %}
+                        <form class="add-show-form">
+                            <input type="hidden" name="show_id" value="{{ info['id'] }}">
+                            <button type="submit" class="btn btn-outline-dark">Watchlist</button>
+                        </form>
+                        <form class="remove-show-form form-hidden">
+                            <input type="hidden" name="movie_id" value="{{ info['id'] }}">
+                            <button type="submit" class="btn btn-outline-danger">Remove</button>
+                        </form>
+                        {% else %}
+                        <form class="add-show-form form-hidden">
+                            <input type="hidden" name="show_id" value="{{ info['id'] }}">
+                            <button type="submit" class="btn btn-outline-dark">Watchlist</button>
+                        </form>
+                        <form class="remove-show-form">
+                            <input type="hidden" name="show_id" value="{{ info['id'] }}">
+                            <button type="submit" class="btn btn-outline-danger">Remove</button>
+                        </form>
+                        {% endif %}
                     {% else %}
-                    <form action="/remove-show/{{ info['id'] }}" method="post">
-                        <button class="btn btn-outline-danger" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                            </svg> Remove
-                        </button>
+                    <form action="/add-show/{{ info['id'] }}" method="post">
+                        <button type="submit" class="btn btn-outline-dark">Watchlist</button>
                     </form>
                     {% endif %}
                 </div>

@@ -89,7 +89,11 @@
                         </svg>
                         {{ "%0.1f" | format(movie["vote_average"]) }}
                     </p>
-                    <form action="/remove-movie/{{ movie['id'] }}" method="post">
+                    <div class="add-movie-form form-hidden">
+                        <p class="card-text">Movie removed</p>
+                    </div>
+                    <form class="remove-movie-form">
+                        <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
                         <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
                     </form>
                 </div>
@@ -122,7 +126,11 @@
                         </svg>
                         {{ "%0.1f" | format(show["vote_average"]) }}
                     </p>
-                    <form action="/remove-show/{{ show['id'] }}" method="post">
+                    <div class="add-show-form form-hidden">
+                        <p class="card-text">Show removed</p>
+                    </div>
+                    <form class="remove-show-form">
+                        <input type="hidden" name="show_id" value="{{ show['id'] }}">
                         <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
                     </form>
                 </div>

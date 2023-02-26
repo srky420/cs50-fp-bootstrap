@@ -13,6 +13,13 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
         <script src="../static/script.js"></script>
+        
+        <!-- Ensure page is reloaded if back or forward history requested -->
+        <script type="text/javascript">  
+            if(performance.navigation.type == 2){
+               location.reload(true);
+            }
+        </script>
 
         <title>AMDb: {% block title %} {% endblock %}</title>
     </head>
@@ -176,6 +183,9 @@
                 </ul>
             </footer>
         </div>
+
+
+        
     </body>
 
 </html>
