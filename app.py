@@ -359,7 +359,7 @@ def add_movie(id):
     
     flash("Movie added!", "success")
     
-    return redirect(request.referrer)
+    return
 
 
 # REMOVE MOVIE ROUTE

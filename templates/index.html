@@ -76,13 +76,29 @@
                             </svg>
                             {{ "%0.1f" | format(trending_movs[i]["vote_average"]) }}
                         </p>
-                        {% if trending_movs[i]["id"] not in added_movies %}
-                        <form action="/add-movie/{{ trending_movs[i]['id'] }}" method="post">
-                            <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
-                        </form>
+                        {% if session["user_id"] %}
+                            {% if trending_movs[i]["id"] not in added_movies %}
+                            <form class="add-movie-form">
+                                <input type="hidden" name="movie_id" value="{{ trending_movs[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                            </form>
+                            <form class="remove-movie-form form-hidden">
+                                <input type="hidden" name="movie_id" value="{{ trending_movs[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                            </form>
+                            {% else %}
+                            <form class="add-movie-form form-hidden">
+                                <input type="hidden" name="movie_id" value="{{ trending_movs[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                            </form>
+                            <form class="remove-movie-form">
+                                <input type="hidden" name="movie_id" value="{{ trending_movs[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                            </form>
+                            {% endif %}
                         {% else %}
-                        <form action="/remove-movie/{{ trending_movs[i]['id'] }}" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                        <form action="/login" method="get">
+                            <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
                         </form>
                         {% endif %}
                     </div>
