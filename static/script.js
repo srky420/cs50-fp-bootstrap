@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         document.querySelector('#searchListOptions').innerHTML = html;
 
-    });
+    });    
 
 });
 
