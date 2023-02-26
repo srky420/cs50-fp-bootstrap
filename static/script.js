@@ -48,6 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });    
 
     // Fetch post for adding/removing movies
+    // For adding movies
     var add_movie_form = document.querySelectorAll('.add-movie-form');
 
     add_movie_form.forEach( (form) => {
@@ -55,13 +56,25 @@ window.addEventListener('DOMContentLoaded', () => {
             console.log(form.elements[0].value, 'add');
 
             form.classList.add('form-hidden');
-            console.log(form.nextSibling.nextElementSibling);
-            form.nextSibling.nextElementSibling.classList.remove('form-hidden');
+
+            var header = {
+                method: 'POST'
+            }
+
+            fetch('/add-movie/' + form.elements[0].value, header)
+            .then( (res) => res.json() )
+            .then( (data) => {
+                    console.log(data)
+                    console.log(form.nextSibling.nextElementSibling);
+                    form.nextSibling.nextElementSibling.classList.remove('form-hidden');
+                }
+            );
 
             e.preventDefault();
         });
     });
 
+    // For removing movies
     var remove_movie_form = document.querySelectorAll('.remove-movie-form');
 
     remove_movie_form.forEach( (form) => {
@@ -69,11 +82,19 @@ window.addEventListener('DOMContentLoaded', () => {
             console.log(form.elements[0].value, 'remove');
 
             form.classList.add('form-hidden');
-            console.log(form.previousSibling.previousElementSibling);
 
-            form.previousSibling.previousElementSibling.classList.remove('form-hidden');
+            var header = {
+                method: 'POST'
+            }
 
-
+            fetch('/remove-movie/' + form.elements[0].value, header)
+            .then( (res) => res.json() )
+            .then( (data) => {
+                    console.log(data)
+                    console.log(form.previousSibling.previousElementSibling);
+                    form.previousSibling.previousElementSibling.classList.remove('form-hidden');
+                }
+            );
 
             e.preventDefault();
         });

@@ -97,7 +97,7 @@
                             </form>
                             {% endif %}
                         {% else %}
-                        <form action="/login" method="get">
+                        <form action="/add-movie/{{ trending_movs[i]['id'] }}" method="post">
                             <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
                         </form>
                         {% endif %}
@@ -129,13 +129,29 @@
                             </svg>
                             {{ "%0.1f" | format(trending_shows[i]["vote_average"]) }}
                         </p>
-                        {% if trending_shows[i]["id"] not in added_shows %}
+                        {% if session["user_id"] %}
+                            {% if trending_shows[i]["id"] not in added_shows %}
+                            <form class="add-show-form">
+                                <input type="hidden" name="show_id" value="{{ trending_shows[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                            </form>
+                            <form class="remove-show-form form-hidden">
+                                <input type="hidden" name="movie_id" value="{{ trending_shows[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                            </form>
+                            {% else %}
+                            <form class="add-show-form form-hidden">
+                                <input type="hidden" name="show_id" value="{{ trending_shows[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                            </form>
+                            <form class="remove-show-form">
+                                <input type="hidden" name="show_id" value="{{ trending_shows[i]['id'] }}">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                            </form>
+                            {% endif %}
+                        {% else %}
                         <form action="/add-show/{{ trending_shows[i]['id'] }}" method="post">
                             <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
-                        </form>
-                        {% else %}
-                        <form action="/remove-show/{{ trending_shows[i]['id'] }}" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
                         </form>
                         {% endif %}
                     </div>

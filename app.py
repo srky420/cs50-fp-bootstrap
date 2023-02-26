@@ -350,6 +350,12 @@ def profile():
 @app.route("/add-movie/<int:id>", methods=["POST"])
 @login_required
 def add_movie(id):
+    # Check if movie exists
+    _movie = Movies.query.filter_by(movie_id = id, user_id = session.get("user_id")).all()
+    
+    if len(_movie) == 1:
+        flash("Error adding movie", "error")
+        return redirect(request.referrer)
     
     # Create movie obj
     movie = Movies(id, False, session.get("user_id"))
@@ -357,55 +363,63 @@ def add_movie(id):
     db.session.add(movie)
     db.session.commit()
     
-    flash("Movie added!", "success")
-    
-    return
+    return jsonify("Movie added")
 
 
 # REMOVE MOVIE ROUTE
 @app.route("/remove-movie/<int:id>", methods=["POST"])
+@login_required
 def remove_movie(id):
-
+    # Check if movie exists
+    _movie = Movies.query.filter_by(movie_id = id, user_id = session.get("user_id")).all()
+    
+    if len(_movie) == 0:
+        flash("Error removing movie", "error")
+        return redirect(request.referrer)
+    
     # Delete movie
     Movies.query.filter_by(movie_id = id, user_id = session.get("user_id")).delete()
     db.session.commit()
     
-    flash("Movie removed!", "success")
-    
-    return redirect(request.referrer)
+    return jsonify('Movie removed')
 
 
 # ADD SHOW ROUTE
 @app.route("/add-show/<int:id>", methods=["POST"])
 @login_required
 def add_show(id):
-    # Get user id
-    user = Users.query.filter_by(id = session.get("user_id")).all()
+    # Check if show exists
+    _show = Shows.query.filter_by(show_id = id, user_id = session.get("user_id")).all()
     
-    # Create movie obj
-    show = Shows(id, False, user[0].id)
+    if len(_show) == 1:
+        flash("Error removing show", "error")
+        return redirect(request.referrer)
+    
+    # Create show obj
+    show = Shows(id, False, session.get("user_id"))
 
     db.session.add(show)
     db.session.commit()
     
-    flash("Show added!", "success")
-    
-    return redirect(request.referrer)
+    return jsonify("Show added")
 
 
 # REMOVE SHOW ROUTE
 @app.route("/remove-show/<int:id>", methods=["POST"])
+@login_required
 def remove_show(id):
-    # Get user id
-    user = Users.query.filter_by(id = session.get("user_id")).all()
+    # Check if show exists
+    show = Shows.query.filter_by(show_id = id, user_id = session.get("user_id")).all()
     
-    # Delete movie
-    Shows.query.filter_by(show_id = id, user_id = user[0].id).delete()
+    if len(show) == 0:
+        flash("Error removing show", "error")
+        return redirect(request.referrer)
+    
+    # Delete show
+    Shows.query.filter_by(show_id = id, user_id = session.get("user_id")).delete()
     db.session.commit()
-    
-    flash("Show removed!", "success")
-    
-    return redirect(request.referrer)
+        
+    return jsonify("Show Removed")
 
 
 # PRIVACY POLICY ROUTE
