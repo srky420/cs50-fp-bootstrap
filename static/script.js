@@ -28,22 +28,36 @@ window.addEventListener('DOMContentLoaded', () => {
                     var title = result[id].title.replace('<', '&lt;').replace('&', '&amp;');
 
                     // Using backticks and curly braces format
-                    html += `<option onclick="window.location.href = '/movie/${result[id]["id"]}';">${title}</option>`;
+                    html += `<li class="d-flex flex-row my-1">
+                                <form action="/movie/${result[id].id}" method="get">
+                                    <input type="image" src="http://image.tmdb.org/t/p/w45/${result[id].poster_path}" alt="Poster" class="mx-1">
+                                </form>
+                                <div>
+                                    <a href="/movie/${result[id].id}"> ${title} </a>
+                                    <p> Movie </p>
+                                </div>
+                            </li>`;
                 }
                 else if (result[id].media_type == 'tv') {
 
                     var title = result[id].name.replace('<', '&lt;').replace('&', '&amp;');
 
                     // Using backticks and curly braces format
-                    html += `<option onclick="window.location.href = '/movie/${result[id]["id"]}';">${title}</option>`;
+                    html += `<li class="d-flex flex-row my-1">
+                                <form action="/show/${result[id].id}" method="get">
+                                    <input type="image" src="http://image.tmdb.org/t/p/w45/${result[id].poster_path}" alt="Poster" class="mx-1">
+                                </form>
+                                <div>
+                                    <a href="/show/${result[id].id}"> ${title} </a>
+                                    <p> Show </p>
+                                </div>
+                            </li>`;
                         
                 }
             }
         }
 
-        console.log(html)
-
-        document.querySelector('#searchListOptions').innerHTML = html;
+        document.querySelector('#search-result > ul').innerHTML = html;
 
     });    
 

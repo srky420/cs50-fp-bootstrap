@@ -20,6 +20,13 @@
     display: none;
 }
 
+#search-result {
+    width: 20%;
+    right: 10%;
+    top: 80%;
+    z-index: 2;
+}
+
 @media screen and (max-width: 768px) {
     .poster-img {
         display: none;

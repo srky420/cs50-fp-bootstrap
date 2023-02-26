@@ -13,7 +13,7 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
         <script src="../static/script.js"></script>
-        
+
         <!-- Ensure page is reloaded if back or forward history requested -->
         <script type="text/javascript">  
             if(performance.navigation.type == 2){
@@ -27,7 +27,7 @@
     <body class="d-flex flex-column min-vh-100">
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark position-relative">
             <div class="container">
                 <a class="navbar-brand" href="/"><img src="../static/logo.png" alt="Logo" width="150"></a>
                 <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
@@ -35,14 +35,10 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse nav-right" id="collapsibleNavId">
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <form class="d-flex ms-auto" action="/search" method="get">
                         <div class="input-group">
-                            <input class="form-control" list="searchListOptions" name="search" id="search"
-                                placeholder="Search..." autocomplete="off">
-                            <datalist id="searchListOptions">
-
-                            </datalist>
+                            <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
                             <input type="hidden" name="page" value="1">
                             <button class="btn btn-outline-light" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -51,6 +47,11 @@
                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                 </svg>
                             </button>
+                        </div>
+                        <div id="search-result" class="bg-body-tertiary position-absolute border rounded-3 p-2">
+                            <ul class="p-0">
+        
+                            </ul>
                         </div>
                     </form>
                 </div>
