@@ -7,7 +7,6 @@
 }
 
 .banner-img:hover {
-    cursor: pointer;
     opacity: 0.9;
     filter: blur(1px);
 }

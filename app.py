@@ -73,12 +73,13 @@ def index():
     # Get trending movies 
     trending_movs = trending_movies_weekly()
     trending_movs = trending_movs["results"]
-    
-    print(trending_movs)
+    x = slice(0, 6)
+    trending_movs = trending_movs[x]
     
     # Get trending shows
     trending_shows = trending_shows_weekly()
     trending_shows = trending_shows["results"]
+    trending_shows = trending_shows[x]
     
     # Get popular movies
     popular_movies = get_popular_movies()
@@ -166,10 +167,16 @@ def show(id):
 # SEASON ROUTE
 @app.route("/season/<int:id>&<int:num>&<string:title>")
 def season(id, num, title):
+    # Get username
+    user = Users.query.filter_by(id = session.get("user_id")).all()
+    username = ""
+    if len(user) == 1:
+        username = user[0].username
+        
     # Get info
     info = get_season(id, num)
     
-    return render_template("season.html", info=info, title=title)
+    return render_template("season.html", info=info, title=title, username=username)
 
 
 # SEARCH ROUTE
@@ -230,6 +237,11 @@ def login():
         return redirect("/")
     
     # GET
+    user = Users.query.filter_by(id = session.get("user_id")).all()
+    if len(user) == 1:
+        flash("Already logged in!", "error")
+        return redirect("/")
+    
     return render_template("login.html")
     
     
@@ -280,6 +292,11 @@ def register():
         return redirect("/")
 
     # GET
+    user = Users.query.filter_by(id = session.get("user_id")).all()
+    if len(user) == 1:
+        flash("Already logged in!", "error")
+        return redirect("/")
+    
     return render_template("signup.html")
 
 

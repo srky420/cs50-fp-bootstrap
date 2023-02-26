@@ -19,10 +19,10 @@
                 <div class="col-8 col-md-6 col-lg-4">
                     <div class="card-body">
                         {% if result["title"] %}
-                        <a class="card-title text-decoration-none" href="/movie/{{ result['id'] }}"> {{ result["title"]
+                        <a class="card-title text-decoration-none text-info" href="/movie/{{ result['id'] }}"> {{ result["title"]
                             }}</a>
                         {% else %}
-                        <a class="card-title text-decoration-none" href="/show/{{ result['id'] }}"> {{ result["name"] }}</a>
+                        <a class="card-title text-decoration-none text-info" href="/show/{{ result['id'] }}"> {{ result["name"] }}</a>
                         {% endif %}
                         <p class="card-text m-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow"
