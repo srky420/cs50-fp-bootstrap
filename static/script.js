@@ -2,10 +2,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Realtime search results
     var input = document.querySelector('#search');
+    var search_result = document.querySelector('#search-result');
 
     input.addEventListener('input', async (e) => {
 
         if (!input) return;
+
+        if (input.value === '') {
+            search_result.style.opacity = '0';
+        }
+        else {
+            search_result.style.opacity = '1';
+        }
 
         // Fetch url
         var response = await fetch('/search-rt?search=' + input.value);
@@ -30,11 +38,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     // Using backticks and curly braces format
                     html += `<li class="d-flex flex-row my-1">
                                 <form action="/movie/${result[id].id}" method="get">
-                                    <input type="image" src="http://image.tmdb.org/t/p/w45/${result[id].poster_path}" alt="Poster" class="mx-1">
+                                    <input type="image" src="http://image.tmdb.org/t/p/w45/${result[id].poster_path}" alt="Poster" class="mx-2">
                                 </form>
                                 <div>
-                                    <a href="/movie/${result[id].id}"> ${title} </a>
-                                    <p> Movie </p>
+                                    <a class="text-decoration-none" href="/movie/${result[id].id}"> ${title} </a>
+                                    <p class="text-muted"> Movie </p>
                                 </div>
                             </li>`;
                 }
@@ -45,11 +53,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     // Using backticks and curly braces format
                     html += `<li class="d-flex flex-row my-1">
                                 <form action="/show/${result[id].id}" method="get">
-                                    <input type="image" src="http://image.tmdb.org/t/p/w45/${result[id].poster_path}" alt="Poster" class="mx-1">
+                                    <input type="image" src="http://image.tmdb.org/t/p/w45/${result[id].poster_path}" alt="Poster" class="mx-2">
                                 </form>
                                 <div>
-                                    <a href="/show/${result[id].id}"> ${title} </a>
-                                    <p> Show </p>
+                                    <a class="text-decoration-none" href="/show/${result[id].id}"> ${title} </a>
+                                    <p class="text-muted"> Show </p>
                                 </div>
                             </li>`;
                         

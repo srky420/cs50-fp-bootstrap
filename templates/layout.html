@@ -27,7 +27,7 @@
     <body class="d-flex flex-column min-vh-100">
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark position-relative">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="/"><img src="../static/logo.png" alt="Logo" width="150"></a>
                 <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
@@ -36,9 +36,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
-                    <form class="d-flex ms-auto" action="/search" method="get">
+                    <form class="d-flex ms-auto position-relative" action="/search" method="get">
                         <div class="input-group">
-                            <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+                            <input type="text" name="search" id="search" class="form-control" placeholder="Search..." autocomplete="off">
                             <input type="hidden" name="page" value="1">
                             <button class="btn btn-outline-light" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -48,7 +48,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div id="search-result" class="bg-body-tertiary position-absolute border rounded-3 p-2">
+                        <div id="search-result" class="bg-body-tertiary position-absolute border rounded-bottom p-2">
                             <ul class="p-0">
         
                             </ul>

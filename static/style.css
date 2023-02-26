@@ -21,10 +21,15 @@
 }
 
 #search-result {
-    width: 20%;
-    right: 10%;
-    top: 80%;
+    opacity: 0;
+    width: 100%;
+    right: 0;
+    top: 2.5rem;
     z-index: 2;
+}
+
+#search {
+    width: 15rem;
 }
 
 @media screen and (max-width: 768px) {
