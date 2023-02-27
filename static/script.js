@@ -184,4 +184,31 @@ window.onpageshow = function(event) {
     }
 };
 
+<<<<<<< HEAD
 // Switching movies and shows tabs
+=======
+// Switch tabs
+function switchTabs(el) {
+    // Switch tab classes
+    var movies_tab = document.querySelector('#movies-tab');
+    var shows_tab = document.querySelector('#shows-tab');
+
+    if (el.classList.contains('active')) {
+        return;
+    }
+
+    if (movies_tab.classList.contains('active')) {
+        movies_tab.classList.remove('active');
+        shows_tab.classList.add('active');
+        document.querySelector('#shows-list').classList.remove('visually-hidden');
+        document.querySelector('#movies-list').classList.add('visually-hidden');
+    }
+    else if (shows_tab.classList.contains('active')) {
+        movies_tab.classList.add('active');
+        shows_tab.classList.remove('active');
+        document.querySelector('#shows-list').classList.add('visually-hidden');
+        document.querySelector('#movies-list').classList.remove('visually-hidden');
+    }
+    
+}
+>>>>>>> 2f78f43cbde5c609d1c5ffabd06324e506cc90ac

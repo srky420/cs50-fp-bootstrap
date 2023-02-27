@@ -60,14 +60,14 @@
 {% block body %}
     <!-- Movies Cards -->
     <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
-        <div class="d-flex flex-row align-items-center">
-            <p class="h5 mt-3 me-3">Trending</p>
-            <ul class="nav nav-pills mt-3">
+        <div class="d-flex flex-row align-items-center mt-3">
+            <p class="h5">Trending</p>
+            <ul class="nav nav-tabs mx-2 w-100">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" id="movies-btn" onclick="switchTabs()">Movies</a>
+                  <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this)">Movies</button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="shows-btn">Shows</a>
+                  <button class="nav-link" id="shows-tab" onclick="switchTabs(this)">Shows</button>
                 </li>
             </ul>
         </div>
