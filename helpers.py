@@ -65,6 +65,21 @@ def get_popular_movies():
     return parse_response(response)
 
 
+# Get latest movies
+def get_latest_movies():
+
+    # Contacting the API
+    try:
+        apikey = os.environ.get("API_KEY")
+        url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={apikey}&language=en-US&page=1"
+        response = requests.get(url)
+        response.raise_for_status
+    except requests.RequestException:
+        return None
+
+    # Parse response
+    return parse_response(response)
+
 
 # Get movie details
 def get_movie(id):

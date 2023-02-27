@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, flash, session, jsonify
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_main_posters, get_season, get_popular_movies
+from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_main_posters, get_season, get_latest_movies
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
+import requests
 import urllib.parse
 
 
@@ -73,18 +74,15 @@ def index():
     # Get trending movies 
     trending_movs = trending_movies_weekly()
     trending_movs = trending_movs["results"]
-    x = slice(0, 6)
-    trending_movs = trending_movs[x]
     
     # Get trending shows
     trending_shows = trending_shows_weekly()
     trending_shows = trending_shows["results"]
-    trending_shows = trending_shows[x]
     
     # Get popular movies
-    popular_movies = get_popular_movies()
-    popular_movies = popular_movies["results"]
-     
+    latest_movies = get_latest_movies()
+    latest_movies = latest_movies["results"]
+    
     # Get username
     user = Users.query.filter_by(id = session.get("user_id")).all()
     username = ""
@@ -107,7 +105,7 @@ def index():
     
     return render_template(
         "index.html", trending_movs=trending_movs, trending_shows=trending_shows, username=username, 
-        slides=slides, added_movies=added_movies, added_shows=added_shows, popular_movies=popular_movies
+        slides=slides, added_movies=added_movies, added_shows=added_shows, latest_movies=latest_movies
         )
 
 

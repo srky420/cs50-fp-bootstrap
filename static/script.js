@@ -184,9 +184,6 @@ window.onpageshow = function(event) {
     }
 };
 
-<<<<<<< HEAD
-// Switching movies and shows tabs
-=======
 // Switch tabs
 function switchTabs(el) {
     // Switch tab classes
@@ -211,4 +208,3 @@ function switchTabs(el) {
     }
     
 }
->>>>>>> 2f78f43cbde5c609d1c5ffabd06324e506cc90ac
