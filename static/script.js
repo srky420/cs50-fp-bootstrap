@@ -185,10 +185,10 @@ window.onpageshow = function(event) {
 };
 
 // Switch tabs
-function switchTabs(el) {
+function switchTabs(el, tab_id_1, tab_id_2, list_id_1, list_id_2) {
     // Switch tab classes
-    var movies_tab = document.querySelector('#movies-tab');
-    var shows_tab = document.querySelector('#shows-tab');
+    var movies_tab = document.querySelector(tab_id_1);
+    var shows_tab = document.querySelector(tab_id_2);
 
     if (el.classList.contains('active')) {
         return;
@@ -197,14 +197,14 @@ function switchTabs(el) {
     if (movies_tab.classList.contains('active')) {
         movies_tab.classList.remove('active');
         shows_tab.classList.add('active');
-        document.querySelector('#shows-list').classList.remove('visually-hidden');
-        document.querySelector('#movies-list').classList.add('visually-hidden');
+        document.querySelector(list_id_1).classList.toggle('visually-hidden');
+        document.querySelector(list_id_2).classList.toggle('visually-hidden');
     }
     else if (shows_tab.classList.contains('active')) {
         movies_tab.classList.add('active');
         shows_tab.classList.remove('active');
-        document.querySelector('#shows-list').classList.add('visually-hidden');
-        document.querySelector('#movies-list').classList.remove('visually-hidden');
+        document.querySelector(list_id_1).classList.toggle('visually-hidden');
+        document.querySelector(list_id_2).classList.toggle('visually-hidden');
     }
     
 }

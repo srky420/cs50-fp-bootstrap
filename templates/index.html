@@ -64,10 +64,10 @@
             <p class="h5">Trending</p>
             <ul class="nav nav-tabs mx-2 w-100">
                 <li class="nav-item">
-                  <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this)">Movies</button>
+                  <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Movies</button>
                 </li>
                 <li class="nav-item">
-                  <button class="nav-link" id="shows-tab" onclick="switchTabs(this)">Shows</button>
+                  <button class="nav-link" id="shows-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Shows</button>
                 </li>
             </ul>
         </div>
@@ -200,7 +200,7 @@
                             {{ "%0.1f" | format(movie["vote_average"]) }}
                         </p>
                         {% if session["user_id"] %}
-                            {% if movie["id"] not in added_shows %}
+                            {% if movie["id"] not in added_movies %}
                             <form class="add-movie-form">
                                 <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
                                 <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
