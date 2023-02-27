@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, session, jsonify
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_main_posters, get_season, get_latest_movies
+from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
 import requests
@@ -71,7 +71,6 @@ class Shows(db.Model):
 def index():
     # image format for TMDB: http://image.tmdb.org/t/p/w500/your_poster_path
 
-    x = slice(0, 6)
     # Get trending movies 
     trending_movs = trending_movies_weekly()
     trending_movs = trending_movs["results"]
@@ -80,11 +79,14 @@ def index():
     trending_shows = trending_shows_weekly()
     trending_shows = trending_shows["results"]
     
-    # Get popular movies
-    latest_movies = get_latest_movies()
+    # Get now playing movies
+    latest_movies = now_playing_movies()
     latest_movies = latest_movies["results"]
-
-    remove = []
+    
+    # Get on air shows
+    shows_on_air = on_air_shows()
+    shows_on_air = shows_on_air["results"]
+    
 
     for i in range(len(latest_movies)):
         for j in range(len(trending_movs)):
@@ -115,7 +117,7 @@ def index():
     
     return render_template(
         "index.html", trending_movs=trending_movs, trending_shows=trending_shows, username=username, 
-        slides=slides, added_movies=added_movies, added_shows=added_shows, latest_movies=latest_movies
+        slides=slides, added_movies=added_movies, added_shows=added_shows, latest_movies=latest_movies, shows_on_air=shows_on_air
         )
 
 
@@ -168,8 +170,18 @@ def show(id):
     # Check if its on watchlist
     if len(shows) == 1:
         is_added = True
-    
-    return render_template("show.html", info=info, is_added=is_added, username=username)
+        
+    # Check for exsiting shows in similar shows list
+    added = []
+    existing_shows = Shows.query.filter_by(user_id = session.get("user_id")).all()
+    for show in existing_shows:
+        if show:
+            added.append(show.show_id)
+            
+    # Get similar shows    
+    similar_shows = get_similar_shows(id)
+    similar_shows = similar_shows["results"]
+    return render_template("show.html", info=info, is_added=is_added, username=username, added=added, similar_shows=similar_shows)
 
 
 # SEASON ROUTE

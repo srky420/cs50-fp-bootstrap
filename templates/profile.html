@@ -74,8 +74,10 @@
         {% for movie in movies_list %}
         <div class="col-6 col-md-4 col-lg-2 mb-3">
             <div class="card h-100 w-100">
-                <img src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top"
-                    alt="Poster">
+                <form action="/movie/{{ movie['id'] }}" method="get">
+                    <input type="image" src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top"
+                        alt="Poster">
+                </form>
                 <div class="card-body">
                     <a class="card-title h6 text-decoration-none" href="/movie/{{ movie['id'] }}">{{
                         movie["title"] }}</a>
@@ -111,8 +113,10 @@
         {% for show in shows_list %}
         <div class="col-6 col-md-4 col-lg-2 mb-3">
             <div class="card h-100 w-100">
-                <img src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
-                    alt="Poster">
+                <form action="/show/{{ show['id'] }}" method="get">
+                    <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
+                        alt="Poster">
+                </form>
                 <div class="card-body">
                     <a class="card-title h6 text-decoration-none" href="/show/{{ show['id'] }}">{{
                         show["name"] }}</a>
