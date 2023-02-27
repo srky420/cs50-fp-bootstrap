@@ -71,10 +71,11 @@ class Shows(db.Model):
 def index():
     # image format for TMDB: http://image.tmdb.org/t/p/w500/your_poster_path
 
+    x = slice(0, 6)
     # Get trending movies 
     trending_movs = trending_movies_weekly()
     trending_movs = trending_movs["results"]
-    
+
     # Get trending shows
     trending_shows = trending_shows_weekly()
     trending_shows = trending_shows["results"]
@@ -82,6 +83,15 @@ def index():
     # Get popular movies
     latest_movies = get_latest_movies()
     latest_movies = latest_movies["results"]
+
+    remove = []
+
+    for i in range(len(latest_movies)):
+        for j in range(len(trending_movs)):
+            if latest_movies[i]["id"] == trending_movs[j]["id"]:
+                latest_movies[i].clear()
+                break
+
     
     # Get username
     user = Users.query.filter_by(id = session.get("user_id")).all()
