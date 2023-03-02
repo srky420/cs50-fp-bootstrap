@@ -66,11 +66,22 @@
     </div>
 </div>
 
-
-<!-- Watchlist movies -->
+<!-- Watchlist -->
 <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
-    <p class="h5 mt-3">Your movies watchlist</p>
-    <div class="row g-3">
+    <div class="d-flex flex-row align-items-center mt-3">
+        <p class="h5">Watchlist</p>
+        <ul class="nav nav-pills mx-2 w-100">
+            <li class="nav-item">
+              <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Movies</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" id="shows-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Shows</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Watchlist movies -->
+    <div class="row g-3" id="movies-list">
         {% for movie in movies_list %}
         <div class="col-6 col-md-4 col-lg-2 mb-3">
             <div class="card h-100 w-100">
@@ -103,13 +114,8 @@
         </div>
         {% endfor %}
     </div>
-</div>
-
-
-<!-- Watchlist shows -->
-<div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100">
-    <p class="h5 mt-3">Your shows watchlist</p>
-    <div class="row g-3">
+    <!-- Watchlist shows -->
+    <div class="row g-3 visually-hidden" id="shows-list">
         {% for show in shows_list %}
         <div class="col-6 col-md-4 col-lg-2 mb-3">
             <div class="card h-100 w-100">
@@ -143,6 +149,5 @@
         {% endfor %}
     </div>
 </div>
-
 
 {% endblock %}

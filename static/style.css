@@ -6,11 +6,6 @@
     transition: 0.2s all;
 }
 
-.banner-img:hover {
-    opacity: 0.9;
-    filter: blur(1px);
-}
-
 .form-hidden {
     display: none;
 }
