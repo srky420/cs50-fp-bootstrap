@@ -69,7 +69,6 @@ class Shows(db.Model):
 def index():
     # image format for TMDB: http://image.tmdb.org/t/p/w500/your_poster_path
 
-    x = slice(0, 12)
     # Get trending movies 
     trending_movs = trending_movies_weekly()
     trending_movs = trending_movs["results"]
@@ -78,17 +77,14 @@ def index():
     # Get trending shows
     trending_shows = trending_shows_weekly()
     trending_shows = trending_shows["results"]
-    trending_shows = trending_shows[x]
     
     # Get now playing movies
     latest_movies = now_playing_movies()
     latest_movies = latest_movies["results"]
-    latest_movies = latest_movies[x]
     
     # Get on air shows
     shows_on_air = on_air_shows()
     shows_on_air = shows_on_air["results"]
-    shows_on_air = shows_on_air[x]
     
 
     for i in range(len(latest_movies)):

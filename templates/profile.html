@@ -5,7 +5,7 @@
 {% block body %}
 
 <!-- Profile main -->
-<div class="container my-3 p-3 bg-body-tertiary border rounded-3 h-100">
+<div class="container my-3 p-3 bg-body-tertiary border rounded-3 h-100 shadow">
     <div class="row g-4">
         <div class="col-12 col-md-4 col-lg-4">
             <div class="card h-100">
@@ -67,7 +67,7 @@
 </div>
 
 <!-- Watchlist -->
-<div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+<div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
     <div class="d-flex flex-row align-items-center mt-3">
         <p class="h5">Watchlist</p>
         <ul class="nav nav-pills mx-2 w-100">
@@ -81,10 +81,10 @@
     </div>
 
     <!-- Watchlist movies -->
-    <div class="row g-3" id="movies-list">
+    <div class="d-flex flex-row overflow-x-scroll" id="movies-list">
         {% for movie in movies_list %}
-        <div class="col-6 col-md-4 col-lg-2 mb-3">
-            <div class="card h-100 w-100">
+        <div class="my-4">
+            <div class="card h-100 m-1 shadow" style="width: 10em;">
                 <form action="/movie/{{ movie['id'] }}" method="get">
                     <input type="image" src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top"
                         alt="Poster">
@@ -115,10 +115,10 @@
         {% endfor %}
     </div>
     <!-- Watchlist shows -->
-    <div class="row g-3 visually-hidden" id="shows-list">
+    <div class="d-flex flex-row overflow-x-scroll visually-hidden" id="shows-list">
         {% for show in shows_list %}
-        <div class="col-6 col-md-4 col-lg-2 mb-3">
-            <div class="card h-100 w-100">
+        <div class="my-4">
+            <div class="card h-100 m-1 shadow" style="width: 10em;">
                 <form action="/show/{{ show['id'] }}" method="get">
                     <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
                         alt="Poster">

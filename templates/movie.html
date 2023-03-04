@@ -5,8 +5,8 @@
 {% block body %}
 
     <!-- Movie details -->
-    <div class="container my-3 p-3 bg-body-tertiary border rounded-3">
-        <div class="card mb-3 w-100">
+    <div class="container my-3 p-3 bg-body-tertiary border rounded-3 shadow">
+        <div class="card mb-3 w-100 shadow">
             <div class="row g-0">
                 <div class="col-12 col-md-8 col-lg-10">
                     <div class="card-body">
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header p-0">
                 <img src="http://image.tmdb.org/t/p/w1280/{{ info['backdrop_path'] }}" alt="Poster" class="card-img-top">
             </div>
@@ -80,20 +80,20 @@
     </div>
 
     <!-- Similar Movies -->
-    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
         <p class="h5 mt-3">Similar movies</p>
-        <div class="row g-3">
-            {% for i in range(6) %}
-            {% if similar_movies[i] and similar_movies[i]["poster_path"] %}
-            <div class="col-6 col-md-4 col-lg-2 mb-3">
-                <div class="card h-100 w-100">
-                    <form action="/movie/{{ similar_movies[i]['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ similar_movies[i]['poster_path'] }}" class="card-img-top"
+        <div class="d-flex flex-row overflow-x-scroll">
+            {% for movie in similar_movies %}
+            {% if movie["id"] and movie["poster_path"] %}
+            <div class="my-4">
+                <div class="card h-100 m-1 shadow" style="width: 10em;">
+                    <form action="/movie/{{ movie['id'] }}" method="get">
+                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top"
                             alt="Poster">
                     </form>
                     <div class="card-body">
-                        <a class="card-title h6 text-decoration-none" href="/movie/{{ similar_movies[i]['id'] }}">{{
-                            similar_movies[i]["title"] }}</a>
+                        <a class="card-title h6 text-decoration-none" href="/movie/{{ movie['id'] }}">{{
+                            movie["title"] }}</a>
                     </div>
                     <div class="card-footer">
                         <p class="card-text">
@@ -102,30 +102,30 @@
                                 <path
                                     d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
-                            {{ "%0.1f" | format(similar_movies[i]["vote_average"]) }}
+                            {{ "%0.1f" | format(movie["vote_average"]) }}
                         </p>
                         {% if session["user_id"] %}
-                            {% if similar_movies[i]["id"] not in added %}
+                            {% if movie["id"] not in added %}
                             <form class="add-movie-form">
-                                <input type="hidden" name="movie_id" value="{{ similar_movies[i]['id'] }}">
+                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
                                 <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
                             </form>
                             <form class="remove-movie-form form-hidden">
-                                <input type="hidden" name="movie_id" value="{{ similar_movies[i]['id'] }}">
+                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
                             </form>
                             {% else %}
                             <form class="add-movie-form form-hidden">
-                                <input type="hidden" name="movie_id" value="{{ similar_movies[i]['id'] }}">
+                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
                                 <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
                             </form>
                             <form class="remove-movie-form">
-                                <input type="hidden" name="movie_id" value="{{ similar_movies[i]['id'] }}">
+                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
                             </form>
                             {% endif %}
                         {% else %}
-                        <form action="/add-movie/{{ similar_movies[i]['id'] }}" method="post">
+                        <form action="/add-movie/{{ movie['id'] }}" method="post">
                             <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
                         </form>
                         {% endif %}

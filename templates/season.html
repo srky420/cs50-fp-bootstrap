@@ -5,8 +5,8 @@
 {% block body %}
 
 <!-- Show details -->
-<div class="container my-3 p-3 bg-body-tertiary border rounded-3">
-    <div class="card mb-3 w-100">
+<div class="container my-3 p-3 bg-body-tertiary border rounded-3 shadow">
+    <div class="card mb-3 w-100 shadow">
         <div class="row g-0">
             <div class="col-12 col-md-8 col-lg-10">
                 <div class="card-body">
@@ -31,9 +31,9 @@
     </div>
 
 
-    <!-- Seasons Cards -->
+    <!-- Episodes -->
 
-    <div class="container my-3 p-3 bg-light-subtle border rounded-3">
+    <div class="container my-3 p-3 bg-light-subtle border rounded-3 shadow">
         <p class="h5 mb-3">Episodes</p>
             {% for episode in info["episodes"] %}
             {% if episode['still_path'] %}

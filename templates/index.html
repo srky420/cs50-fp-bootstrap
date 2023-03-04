@@ -59,7 +59,7 @@
 
 {% block body %}
     <!-- Trending Movies/Shows -->
-    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
         <div class="d-flex flex-row align-items-center mt-3">
             <p class="h5 me-3">Trending</p>
             <ul class="nav nav-pills mx-2 w-100">
@@ -74,7 +74,7 @@
         <div class="d-flex flex-row overflow-x-scroll" id="movies-list">
             {% for movie in trending_movs %}
             <div class="my-4">
-                <div class="card h-100 mx-2 mt-2" style="width: 10em;">
+                <div class="card h-100 m-1 shadow" style="width: 10em;">
                     <form action="/movie/{{ movie['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top"
                             alt="Poster">
@@ -122,10 +122,10 @@
             </div>
             {% endfor %}
         </div>
-        <div class="row g-3 visually-hidden" id="shows-list">
+        <div class="d-flex flex-row overflow-x-scroll visually-hidden" id="shows-list">
             {% for show in trending_shows %}
-            <div class="col-6 col-md-4 col-lg-2 mb-3">
-                <div class="card h-100 w-100">
+            <div class="my-4">
+                <div class="card h-100 m-1 shadow" style="width: 10em;">
                     <form action="/show/{{ show['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
                             alt="Poster">
@@ -176,13 +176,13 @@
     </div>
 
     <!-- Latest/Now playing Movies -->
-    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
         <p class="h5 mt-3">Now playing movies</p>
-        <div class="row g-3">
+        <div class="d-flex flex-row overflow-x-scroll">
             {% for movie in latest_movies %}  
             {% if movie != {} %}                   
-            <div class="col-6 col-md-4 col-lg-2 mb-3">
-                <div class="card h-100 w-100">
+            <div class="my-4">
+                <div class="card h-100 m-1 shadow" style="width: 10em;">
                     <form action="/movie/{{ movie['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top"
                             alt="Poster">
@@ -234,12 +234,12 @@
     </div>
 
     <!-- On air shows -->
-    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
+    <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
         <p class="h5 mt-3">On air shows</p>
-        <div class="row g-3">
+        <div class="d-flex flex-row overflow-x-scroll">
             {% for show in shows_on_air %}
-            <div class="col-6 col-md-4 col-lg-2 mb-3">
-                <div class="card h-100 w-100">
+            <div class="my-4">
+                <div class="card h-100 m-1 shadow" style="width: 10em;">
                     <form action="/show/{{ show['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
                             alt="Poster">
