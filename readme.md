@@ -19,7 +19,7 @@
 
 ## How to use
 #
-- ### Requirements:
+- ### REQUIREMENTS
     - flask
     - flask_session 
     - flask_sqlalchemy
@@ -28,15 +28,36 @@
     - urllib.parse
     - functools
     - os
-- ### Package Installation:
+
+<br>
+
+- ### PACKAGES INSTALLATION
     1. First download and install Python 3 [here](https://www.python.org/downloads/)
 
-    2. Install pip from [here](https://pip.pypa.io/en/stable/installation/) (Note: Make sure to Python to environment variables)
+        Ensure Python 3 is installed
 
-    3. Use pip to install Python packages e.g. flask, flask_sqlalchemy, requests etc.
+            python --version
+
+    2. Install pip from [here](https://pip.pypa.io/en/stable/installation/) (Note: Make sure to add Python to environment variables)
     
+        Ensure pip is installed
+
+            pip --version
     
 
+
+    3. Use pip to install Python packages e.g. flask, flask_sqlalchemy and requests
+
+            pip install flask
+
+            pip install flask_sqlalchemy
+
+            pip install requests
+            
+    
+    4. Clone the project from GitHub repo [here]()
+
+            git clone <url>
 
 
 
