@@ -73,7 +73,7 @@ def index():
     # Get trending movies 
     trending_movs = trending_movies_weekly()
     trending_movs = trending_movs["results"]
-    trending_movs = trending_movs[x]
+   
 
     # Get trending shows
     trending_shows = trending_shows_weekly()

@@ -26,6 +26,22 @@
     width: 15rem;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 15px;
+    background-color: lightgray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: grey;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: darkgrey;
+}
+
 @media screen and (max-width: 768px) {
     .poster-img {
         display: none;

@@ -61,7 +61,7 @@
     <!-- Trending Movies/Shows -->
     <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3">
         <div class="d-flex flex-row align-items-center mt-3">
-            <p class="h5">Trending</p>
+            <p class="h5 me-3">Trending</p>
             <ul class="nav nav-pills mx-2 w-100">
                 <li class="nav-item">
                   <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Movies</button>
@@ -71,10 +71,10 @@
                 </li>
             </ul>
         </div>
-        <div class="row g-3" id="movies-list">
+        <div class="d-flex flex-row overflow-x-scroll" id="movies-list">
             {% for movie in trending_movs %}
-            <div class="col-6 col-md-4 col-lg-2 mb-3">
-                <div class="card h-100 w-100">
+            <div class="my-4">
+                <div class="card h-100 mx-2 mt-2" style="width: 10em;">
                     <form action="/movie/{{ movie['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top"
                             alt="Poster">

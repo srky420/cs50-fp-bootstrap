@@ -31,7 +31,7 @@
 
 <br>
 
-- ### INSTALLATION AND EXECUTION
+- ### INSTALLATION AND USAGE
     1. First download and install Python 3 [here](https://www.python.org/downloads/)
 
         Ensure Python 3 is installed
