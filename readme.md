@@ -19,7 +19,7 @@
 
 ## How to use
 #
-- ### Requirements:
+- ### REQUIREMENTS
     - flask
     - flask_session 
     - flask_sqlalchemy
@@ -28,17 +28,46 @@
     - urllib.parse
     - functools
     - os
-- ### Package Installation:
+
+<br>
+
+- ### INSTALLATION AND EXECUTION
     1. First download and install Python 3 [here](https://www.python.org/downloads/)
 
-    2. Install pip from [here](https://pip.pypa.io/en/stable/installation/) (Note: Make sure to Python to environment variables)
+        Ensure Python 3 is installed
 
-    3. Use pip to install Python packages e.g. flask, flask_sqlalchemy, requests etc.
+            python --version
+
+    2. Install pip from [here](https://pip.pypa.io/en/stable/installation/) (Note: Make sure to add Python to environment variables)
+    
+        Ensure pip is installed
+
+            pip --version
+
+    3. Use pip to install Python packages e.g. flask, flask_sqlalchemy and requests
+
+            pip install flask
+
+            pip install flask_sqlalchemy
+
+            pip install requests
+            
+    4. Clone the project from GitHub repo [here]()
+
+            git clone <url>
+
+    5. Be sure to signup at TMDb [here](https://www.themoviedb.org/) and get your free API KEY
+
+    6. After receiving your API KEY, make sure to store it in an environment variable as follow
+
+            $env:API_KEY="<API KEY>"
+
+    7. Run the app using
+
+            python app.py
 
     
-    
-    
-
+    Note: API KEY must be set each time you reopen the project
 
 
 
