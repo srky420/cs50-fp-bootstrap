@@ -56,11 +56,13 @@
 
         git clone <url>
 
+<br>
+
 ## Usage
 #
 1. Be sure to signup at TMDb [here](https://www.themoviedb.org/) and get your free API KEY
 
-2. After receiving your API KEY, make sure to store it in this environment variable as follow
+2. After receiving your API KEY, make sure to store it in an environment variable as follow
 
         $env:API_KEY="<API KEY>"
 
@@ -72,5 +74,33 @@
 
 **Note**: API KEY must be set each time you reopen the project
 
+<br>
 
+## Implementation Details
+#
+### Configuring Flask App
+
+- Configure flask app with the help of flask docs [here](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
+
+
+### Contacting API
+
+- Retreive API KEY from environment variable using
+
+        os.environ.get("API_KEY")
+
+- Create appropriate url for specific requests using TMDb instructions and API KEY
+- Requests the url using
+
+        response = requests.get(url)
+- Check for errors using try-except
+- Parse response using
+
+        response = response.json()
+
+### Creating Database Model
+
+- Create DB using Python classes and Flask SQLAlchemy with the help of flask docs [here](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/)
+
+### Creating Routes
 
