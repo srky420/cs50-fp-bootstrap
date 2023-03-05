@@ -26,6 +26,10 @@
     width: 15rem;
 }
 
+.poster-title {
+    text-shadow: 0 2px 1px black;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
