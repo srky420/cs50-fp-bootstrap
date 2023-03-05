@@ -6,7 +6,7 @@
 <br>
 
 ## Features
-#
+
 - Browse new, trending and popular movies and tv shows
 - Access details like ratings, overviews, release dates and posters
 - Watchlist movies and tv shows in realtime without page reload
@@ -18,7 +18,7 @@
 <br>
 
 ## Requirements
-#
+
 - flask
 - flask_session 
 - flask_sqlalchemy
@@ -31,7 +31,7 @@
 <br>
 
 ## Installation
-#
+
 1. First download and install Python 3 [here](https://www.python.org/downloads/)
 
     Ensure Python 3 is installed
@@ -59,7 +59,7 @@
 <br>
 
 ## Usage
-#
+
 1. Be sure to signup at TMDb [here](https://www.themoviedb.org/) and get your free API KEY
 
 2. After receiving your API KEY, make sure to store it in an environment variable as follow
@@ -77,7 +77,7 @@
 <br>
 
 ## Implementation Details
-#
+
 ### Configuring Flask App
 
 - Configure flask app with the help of flask docs [here](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
