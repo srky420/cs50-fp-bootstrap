@@ -79,11 +79,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
             form.classList.add('form-hidden');
 
-            var header = {
-                method: 'POST'
-            }
+            var options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
 
-            fetch('/add-movie/' + form.elements[0].value, header)
+            fetch('/add-movie/' + form.elements[0].value, options)
             .then( (res) => res.json() )
             .then( (data) => {
                     console.log(data)
