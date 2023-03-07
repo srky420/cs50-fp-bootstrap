@@ -225,9 +225,15 @@
 
 - Notice how above table has user_id as Foreign Key which helps determine which movies belong to which users and used to display appropriate add/remove buttons, similarly for Shows table as well.
 
+### Contact and Links
 
+- [LinkedIn](http://www.linkedin.com/in/shahrukh-khan-2b8968242)
 
+- [Facebook](https://www.facebook.com/profile.php?id=100083623483613&mibextid=ZbWKwL)
 
+- [Youtube](https://www.youtube.com/channel/UCI2Kq5ukQKJ5roK_WL7TQsg)
 
-        
+- srky420@gmail.com
+
+#
 
