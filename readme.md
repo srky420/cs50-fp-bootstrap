@@ -1,4 +1,6 @@
-![](./static/logo.png)
+<div style="background-color: black; text-align:center;">
+        <img src="./static/logo.png">
+</div>
 
 ### Browse, Search and Watchlist your favorite Movies and TV Shows    
   
