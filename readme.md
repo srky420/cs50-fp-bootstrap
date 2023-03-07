@@ -80,23 +80,25 @@
 
 ### Configuring Flask App
 
+- Creating templates folder to hold html templates and static folder to hold styling and scripting files
+
 - Configure flask app with the help of flask docs [here](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
 
 
 ### Contacting API
 
-- Retreives API KEY from environment variable using
+- Retreiving API KEY from environment variable using
 
         os.environ.get("API_KEY")
 
-- Creates appropriate url for specific requests using TMDb instructions and API KEY
+- Created an appropriate url for specific requests using TMDb instructions and API KEY
 - Requests the url using
 
         url = f"https://"
         response = requests.get(url)
 
-- Checks for errors using try-except
-- Parses response using
+- Checking for errors using try-except
+- Parsing response using json()
 
         response = response.json()
 
@@ -116,7 +118,35 @@
         def hello(name=None):
         return render_template('hello.html', name=name)
 
+- Templates are located in template folder, each route renders a specific template
+
 ### Creating JS Requests
 
 - Realtime requests are made for search suggestions and watchlist add/remove buttons using JavaScript fetch
+        
+        /* For search suggestions */
+
+        response = await fetch(<url>)
+        result = await response.json()
+
+        /* For add/remove buttons */
+
+        var options = {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 
+                        'appication/json'       
+                }
+        };
+        fetch(<url>, options)
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+        
+**Note**: Above code is just an example, see actual JS file for more details and docs [here](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+### Creating User Authentication
+
+
+
+        
 
