@@ -276,7 +276,7 @@ def logout():
     
 # REGISTER ROUTE
 @app.route("/signup", methods=["GET", "POST"])
-def register():
+def signup():
     # POST
     if request.method == "POST":
         username = request.form.get("username")
