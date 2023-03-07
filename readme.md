@@ -85,22 +85,38 @@
 
 ### Contacting API
 
-- Retreive API KEY from environment variable using
+- Retreives API KEY from environment variable using
 
         os.environ.get("API_KEY")
 
-- Create appropriate url for specific requests using TMDb instructions and API KEY
+- Creates appropriate url for specific requests using TMDb instructions and API KEY
 - Requests the url using
 
+        url = f"https://"
         response = requests.get(url)
-- Check for errors using try-except
-- Parse response using
+
+- Checks for errors using try-except
+- Parses response using
 
         response = response.json()
 
 ### Creating Database Model
 
-- Create DB using Python classes and Flask SQLAlchemy with the help of flask docs [here](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/)
+- DB model is created using Python classes and Flask SQLAlchemy with the help of flask docs [here](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/)
 
 ### Creating Routes
+
+- Routes are created with the help of flask and view is created by render_template function
+
+        # Example route
+
+        from flask import render_template
+
+        @app.route('/hello/<name>')
+        def hello(name=None):
+        return render_template('hello.html', name=name)
+
+### Creating JS Requests
+
+- Realtime requests are made for search suggestions and watchlist add/remove buttons using JavaScript fetch
 
