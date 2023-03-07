@@ -104,3 +104,4 @@
 
 ### Creating Routes
 
+- Use flask docs to create appropriate routes
