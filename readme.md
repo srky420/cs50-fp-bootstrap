@@ -171,6 +171,8 @@
 
 Signup
 
+- werkzeug.security is used to generate password hashed and to check them, details [here](https://werkzeug.palletsprojects.com/en/2.2.x/utils/).
+
 - User can only access signup page if not logged in.
 
 - Username and password are stored in Db when a new user signs up with a unique username by creating a new object of Users class.
