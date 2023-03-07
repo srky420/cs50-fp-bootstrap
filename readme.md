@@ -169,7 +169,7 @@
         app.config["SESSION_TYPE"] = "filesystem"
         Session(app)
 
-Signup
+**Signup**
 
 - werkzeug.security is used to generate password hashed and to check them, details [here](https://werkzeug.palletsprojects.com/en/2.2.x/utils/).
 
@@ -187,7 +187,7 @@ Signup
 
 **Note**: user.id represents an object of Users class which is used to create a new row in Database with the help of SQLAlchemy ORM.
 
-Login
+**Login**
 
 - User cannot access login page if they are already logged in.
 
@@ -201,7 +201,7 @@ Login
 
         session["user_id"] = user[0].id
 
-Logout
+**Logout**
 
 - Logout simply clears the session and redirects
 
