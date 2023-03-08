@@ -78,9 +78,9 @@
 
 ### Configuring Flask App
 
-- Creating templates folder to hold html templates and static folder to hold styling and scripting files
+- Creating templates folder to hold html templates and static folder to hold styling and scripting files.
 
-- Configure flask app with the help of flask docs [here](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
+- Flask app with the help of flask docs [here](https://flask.palletsprojects.com/en/2.2.x/quickstart/).
 
 
 ### Contacting API
@@ -227,8 +227,6 @@
 ### Creating Templates
 
 - Lastly, movies and shows data are requested from API and displayed using HTML with Jinja2 syntax(i.e. for looping through lists, creating if statements and so on). More [here](https://flask.palletsprojects.com/en/2.2.x/templating/).
-
-
 
 <br>
 
