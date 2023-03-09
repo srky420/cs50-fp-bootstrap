@@ -30,6 +30,16 @@
     text-shadow: 0 2px 1px black;
 }
 
+.api-logo {
+    transition: all 0.2s ease-out;
+    transform: scale(1);
+}
+
+.api-logo:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
