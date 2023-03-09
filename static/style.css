@@ -30,6 +30,11 @@
     text-shadow: 0 2px 1px black;
 }
 
+.title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .api-logo {
     transition: all 0.2s ease-out;
     transform: scale(1);

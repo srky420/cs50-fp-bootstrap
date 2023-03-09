@@ -74,17 +74,15 @@
         <div class="d-flex flex-row overflow-x-scroll" id="movies-list">
             {% for movie in trending_movs %}
             <div class="my-4">
-                <div class="card h-100 m-1 shadow" style="width: 10em;">
+                <div class="card h-100 m-1 shadow position-relative" style="width: 10em;">
                     <form action="/movie/{{ movie['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top"
                             alt="Poster">
                     </form>
-                    <div class="card-body">
+                    <div class="card-body overflow-hidden title py-1">
                         <a class="card-title h6 text-decoration-none" href="/movie/{{ movie['id'] }}">{{
                             movie["title"] }}</a>
-                    </div>
-                    <div class="card-footer">
-                        <p class="card-text">
+                        <p class="card-text my-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
                                 class="bi bi-star-fill" viewBox="0 2 16 16">
                                 <path
@@ -92,32 +90,38 @@
                             </svg>
                             {{ "%0.1f" | format(movie["vote_average"]) }}
                         </p>
-                        {% if session["user_id"] %}
-                            {% if movie["id"] not in added_movies %}
-                            <form class="add-movie-form">
-                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
-                            </form>
-                            <form class="remove-movie-form form-hidden">
-                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                            </form>
-                            {% else %}
-                            <form class="add-movie-form form-hidden">
-                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
-                            </form>
-                            <form class="remove-movie-form">
-                                <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                            </form>
-                            {% endif %}
+                    </div>
+                    
+                    {% if session["user_id"] %}
+                        {% if movie["id"] not in added_movies %}
+                        <form class="add-movie-form position-absolute top-0" style="right: 0;">
+                            <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
+                            <button type="submit" class="btn btn-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <form class="remove-movie-form form-hidden">
+                            <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
+                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                        </form>
                         {% else %}
-                        <form action="/add-movie/{{ movie['id'] }}" method="post">
-                            <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                        <form class="add-movie-form form-hidden">
+                            <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
+                            <button type="submit" class="btn btn-outline-dark btn-sm w-100">Watchlist</button>
+                        </form>
+                        <form class="remove-movie-form">
+                            <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
+                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">Remove</button>
                         </form>
                         {% endif %}
-                    </div>
+                    {% else %}
+                    <form action="/add-movie/{{ movie['id'] }}" method="post">
+                        <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
