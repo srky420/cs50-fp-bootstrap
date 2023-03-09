@@ -62,7 +62,7 @@
     <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
         <div class="d-flex flex-row align-items-center mt-3">
             <p class="h5 me-3">Trending</p>
-            <ul class="nav nav-pills mx-2 w-100">
+            <ul class="nav nav-tabs mx-2 w-100">
                 <li class="nav-item">
                   <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Movies</button>
                 </li>
@@ -80,8 +80,6 @@
                             alt="Poster">
                     </form>
                     <div class="card-body overflow-hidden title py-1">
-                        <a class="card-title h6 text-decoration-none" href="/movie/{{ movie['id'] }}">{{
-                            movie["title"] }}</a>
                         <p class="card-text my-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
                                 class="bi bi-star-fill" viewBox="0 2 16 16">
@@ -90,36 +88,56 @@
                             </svg>
                             {{ "%0.1f" | format(movie["vote_average"]) }}
                         </p>
+                        <a class="card-title h6 text-decoration-none" href="/movie/{{ movie['id'] }}">{{
+                            movie["title"] }}</a>
                     </div>
                     
                     {% if session["user_id"] %}
                         {% if movie["id"] not in added_movies %}
                         <form class="add-movie-form position-absolute top-0">
                             <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                            <button type="submit" class="btn btn-light opacity-50 btn-sm rounded-end-0 rounded-bottom-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
                                     <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
                                 </svg>
                             </button>
                         </form>
-                        <form class="remove-movie-form form-hidden">
+                        <form class="remove-movie-form position-absolute top-0 form-hidden">
                             <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                </svg>
+                            </button>
                         </form>
                         {% else %}
-                        <form class="add-movie-form form-hidden">
+                        <form class="add-movie-form position-absolute top-0 form-hidden">
                             <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                            <button type="submit" class="btn btn-outline-dark btn-sm w-100">Watchlist</button>
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </button>
                         </form>
-                        <form class="remove-movie-form">
+                        <form class="remove-movie-form position-absolute top-0">
                             <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                </svg>
+                            </button>
                         </form>
                         {% endif %}
                     {% else %}
-                    <form action="/add-movie/{{ movie['id'] }}" method="post">
-                        <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                    <form action="/add-movie/{{ movie['id'] }}" method="post" class="position-absolute top-0">
+                        <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </button>
                     </form>
                     {% endif %}
                 </div>
@@ -129,17 +147,13 @@
         <div class="d-flex flex-row overflow-x-scroll visually-hidden" id="shows-list">
             {% for show in trending_shows %}
             <div class="my-4">
-                <div class="card h-100 m-1 shadow" style="width: 10em;">
+                <div class="card h-100 m-1 shadow position-relative" style="width: 10em;">
                     <form action="/show/{{ show['id'] }}" method="get">
                         <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
                             alt="Poster">
                     </form>
-                    <div class="card-body">
-                        <a href="/show/{{ show['id'] }}" class="card-title text-decoration-none h6">{{
-                            show["name"] }}</a>
-                    </div>
-                    <div class="card-footer">
-                        <p class="card-text">
+                    <div class="card-body overflow-hidden title py-1">
+                        <p class="card-text my-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
                                 class="bi bi-star-fill" viewBox="0 2 16 16">
                                 <path
@@ -147,32 +161,58 @@
                             </svg>
                             {{ "%0.1f" | format(show["vote_average"]) }}
                         </p>
-                        {% if session["user_id"] %}
-                            {% if show["id"] not in added_shows %}
-                            <form class="add-show-form">
-                                <input type="hidden" name="show_id" value="{{ show['id'] }}">
-                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
-                            </form>
-                            <form class="remove-show-form form-hidden">
-                                <input type="hidden" name="movie_id" value="{{ show['id'] }}">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                            </form>
-                            {% else %}
-                            <form class="add-show-form form-hidden">
-                                <input type="hidden" name="show_id" value="{{ show['id'] }}">
-                                <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
-                            </form>
-                            <form class="remove-show-form">
-                                <input type="hidden" name="show_id" value="{{ show['id'] }}">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                            </form>
-                            {% endif %}
+                        <a href="/show/{{ show['id'] }}" class="card-title text-decoration-none h6">{{
+                            show["name"] }}</a>
+                    </div>
+                    {% if session["user_id"] %}
+                        {% if show["id"] not in added_shows %}
+                        <form class="add-show-form position-absolute top-0">
+                            <input type="hidden" name="show_id" value="{{ show['id'] }}">
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <form class="remove-show-form position-absolute top-0 form-hidden">
+                            <input type="hidden" name="show_id" value="{{ show['id'] }}">
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                </svg>
+                            </button>
+                        </form>
                         {% else %}
-                        <form action="/add-show/{{ show['id'] }}" method="post">
-                            <button type="submit" class="btn btn-outline-dark btn-sm">Watchlist</button>
+                        <form class="add-show-form position-absolute top-0 form-hidden">
+                            <input type="hidden" name="show_id" value="{{ show['id'] }}">
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <form class="remove-show-form position-absolute top-0">
+                            <input type="hidden" name="show_id" value="{{ show['id'] }}">
+                            <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                </svg>
+                            </button>
                         </form>
                         {% endif %}
-                    </div>
+                    {% else %}
+                    <form action="/add-show/{{ show['id'] }}" method="post" class="position-absolute top-0">
+                        <input type="hidden" name="show_id" value="{{ show['id'] }}">
+                        <button type="submit" class="btn btn-dark opacity-75 btn-sm rounded-end-0 rounded-bottom-0 p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </button>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
