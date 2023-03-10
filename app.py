@@ -86,11 +86,18 @@ def index():
     shows_on_air = on_air_shows()
     shows_on_air = shows_on_air["results"]
     
-
+    # Remove duplicate movies
     for i in range(len(latest_movies)):
         for j in range(len(trending_movs)):
             if latest_movies[i]["id"] == trending_movs[j]["id"]:
                 latest_movies[i].clear()
+                break
+            
+    # Remove duplicate shows
+    for i in range(len(shows_on_air)):
+        for j in range(len(trending_shows)):
+            if shows_on_air[i]["id"] == trending_shows[j]["id"]:
+                shows_on_air[i].clear()
                 break
 
     
