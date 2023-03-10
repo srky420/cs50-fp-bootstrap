@@ -155,25 +155,27 @@ def movie(id):
             added.append(movie.movie_id)
     
     # Video results
-    trailers = []
+    trailer = {}
     video = video["results"]
     for vid in video:
-        if vid["site"] == "Youtube" and vid["type"] == "Trailer":
-            print(vid)
+        if vid["type"] == "Trailer":
+            trailer = vid
+            print(trailer)
+            break
 
-
-    print(trailers)
+    
 
     similar_movies = get_similar_movies(id)
     similar_movies = similar_movies["results"]
-    return render_template("movie.html", info=info, similar_movies=similar_movies, is_added=is_added, added=added, username=username)
+    return render_template("movie.html", info=info, similar_movies=similar_movies, is_added=is_added, added=added, username=username, trailer=trailer)
 
 
 # SHOW ROUTE
 @app.route("/show/<int:id>")
 def show(id):
     info = get_show(id)
-    
+    video = get_show_video(id)
+
      # Get username
     user = Users.query.filter_by(id = session.get("user_id")).all()
     username = ""
@@ -195,10 +197,19 @@ def show(id):
         if show:
             added.append(show.show_id)
             
+    # Video results
+    trailer = {}
+    video = video["results"]
+    for vid in video:
+        if vid["type"] == "Trailer":
+            trailer = vid
+            print(trailer)
+            break        
+    
     # Get similar shows    
     similar_shows = get_similar_shows(id)
     similar_shows = similar_shows["results"]
-    return render_template("show.html", info=info, is_added=is_added, username=username, added=added, similar_shows=similar_shows)
+    return render_template("show.html", info=info, is_added=is_added, username=username, added=added, similar_shows=similar_shows, trailer=trailer)
 
 
 # SEASON ROUTE

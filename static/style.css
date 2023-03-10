@@ -73,6 +73,10 @@
     }
 
     .banner-img {
-        height: 250px;
+        height: 300px;
+    }
+
+    .trailer {
+        height: 300px;
     }
 }

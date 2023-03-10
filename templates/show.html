@@ -41,7 +41,12 @@
 
         <div class="card shadow">
             <div class="card-header p-0">
+                {% if trailer != {} %}
+                <iframe width="100%" height="500" class="rounded-top trailer"
+                src="https://www.youtube.com/embed/{{ trailer['key'] }}" frameborder="0"></iframe>
+                {% else %}
                 <img src="http://image.tmdb.org/t/p/w1280/{{ info['backdrop_path'] }}" alt="Poster" class="card-img-top">
+                {% endif %}
             </div>
             <div class="card-body">
                 <div class="card-text">
