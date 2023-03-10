@@ -228,6 +228,17 @@
 
 - Lastly, movies and shows data are requested from API and displayed using HTML with Jinja2 syntax(i.e. for looping through lists, creating if statements and so on). More [here](https://flask.palletsprojects.com/en/2.2.x/templating/).
 
+### Creating Pagination
+
+- Search results are shown within pages.
+
+- Pagination is created using bootstrap and HTML plus Jinja2 syntax.
+
+- Pagination always shows first and last pages with dots when at middle page.
+
+- Pagination shows all the pages when number of pages is less than 5
+
+
 <br>
 
 ## Contact and Links

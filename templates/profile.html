@@ -70,7 +70,7 @@
 <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
     <div class="d-flex flex-row align-items-center mt-3">
         <p class="h5">Watchlist</p>
-        <ul class="nav nav-pills mx-2 w-100">
+        <ul class="nav nav-tabs mx-2 w-100">
             <li class="nav-item">
               <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Movies</button>
             </li>
@@ -89,12 +89,8 @@
                     <input type="image" src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top"
                         alt="Poster">
                 </form>
-                <div class="card-body">
-                    <a class="card-title h6 text-decoration-none" href="/movie/{{ movie['id'] }}">{{
-                        movie["title"] }}</a>
-                </div>
-                <div class="card-footer">
-                    <p class="card-text">
+                <div class="card-body py-1">
+                    <p class="card-text my-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
                             class="bi bi-star-fill" viewBox="0 2 16 16">
                             <path
@@ -102,14 +98,16 @@
                         </svg>
                         {{ "%0.1f" | format(movie["vote_average"]) }}
                     </p>
-                    <div class="add-movie-form form-hidden">
-                        <p class="card-text">Movie removed</p>
-                    </div>
-                    <form class="remove-movie-form">
-                        <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
-                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                    </form>
+                    <a class="card-title h6 text-decoration-none title" href="/movie/{{ movie['id'] }}">{{
+                        movie["title"] }}</a>
                 </div>
+                <div class="add-movie-form form-hidden">
+                    <p class="card-text text-center text-body-tertiary">Movie removed</p>
+                </div>
+                <form class="remove-movie-form">
+                    <input type="hidden" name="movie_id" value="{{ movie['id'] }}">
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                </form>
             </div>
         </div>
         {% endfor %}
@@ -123,12 +121,8 @@
                     <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
                         alt="Poster">
                 </form>
-                <div class="card-body">
-                    <a class="card-title h6 text-decoration-none" href="/show/{{ show['id'] }}">{{
-                        show["name"] }}</a>
-                </div>
-                <div class="card-footer">
-                    <p class="card-text">
+                <div class="card-body py-1">
+                    <p class="card-text my-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
                             class="bi bi-star-fill" viewBox="0 2 16 16">
                             <path
@@ -136,14 +130,16 @@
                         </svg>
                         {{ "%0.1f" | format(show["vote_average"]) }}
                     </p>
-                    <div class="add-show-form form-hidden">
-                        <p class="card-text">Show removed</p>
-                    </div>
-                    <form class="remove-show-form">
-                        <input type="hidden" name="show_id" value="{{ show['id'] }}">
-                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                    </form>
+                    <a class="card-title h6 text-decoration-none title" href="/show/{{ show['id'] }}">{{
+                        show["name"] }}</a>
                 </div>
+                <div class="add-show-form form-hidden">
+                    <p class="card-text text-center text-body-tertiary">Show removed</p>
+                </div>
+                <form class="remove-show-form">
+                    <input type="hidden" name="show_id" value="{{ show['id'] }}">
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                </form>
             </div>
         </div>
         {% endfor %}
