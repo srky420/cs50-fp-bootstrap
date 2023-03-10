@@ -204,3 +204,29 @@ def parse_response(response):
         return response
     except (TypeError, ValueError, KeyError):
         return None
+    
+
+# Get videos related to the movie
+def get_movie_video(id):
+    try:
+        apikey = os.environ.get("API_KEY")
+        url = f"https://api.themoviedb.org/3/movie/{id}/videos?api_key={apikey}&language=en-US"
+        response = requests.get(url)
+        response.raise_for_status
+    except requests.RequestException:
+        return None
+    
+    return parse_response(response)
+
+
+# Get videos related to the show
+def get_show_video(id):
+    try:
+        apikey = os.environ.get("API_KEY")
+        url = f"https://api.themoviedb.org/3/tv/{id}/videos?api_key={apikey}&language=en-US"
+        response = requests.get(url)
+        response.raise_for_status
+    except requests.RequestException:
+        return None
+    
+    return parse_response(response)

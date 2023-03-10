@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, session, jsonify
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows
+from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows, get_movie_video, get_show_video
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
 
@@ -131,6 +131,7 @@ def index():
 @app.route("/movie/<int:id>")
 def movie(id):
     info = get_movie(id)
+    video = get_movie_video(id)
     
     # Get username
     user = Users.query.filter_by(id = session.get("user_id")).all()
@@ -153,6 +154,16 @@ def movie(id):
         if movie:
             added.append(movie.movie_id)
     
+    # Video results
+    trailers = []
+    video = video["results"]
+    for vid in video:
+        if vid["site"] == "Youtube" and vid["type"] == "Trailer":
+            print(vid)
+
+
+    print(trailers)
+
     similar_movies = get_similar_movies(id)
     similar_movies = similar_movies["results"]
     return render_template("movie.html", info=info, similar_movies=similar_movies, is_added=is_added, added=added, username=username)
