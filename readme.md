@@ -2,7 +2,7 @@
 ![](./static/All_Movies_Db.png)
 
 ### Browse, Search and Watchlist your favorite Movies and TV Shows    
-  
+ 
 <br>
 
 ## Features
@@ -52,9 +52,9 @@
 
         pip install requests
         
-4. Clone the project from GitHub repo [here]()
+4. Clone the project from GitHub repo [here](https://github.com/srky420/cs50-fp-bootstrap)
 
-        git clone <url>
+        git clone https://github.com/srky420/cs50-fp-bootstrap.git
 
 <br>
 
@@ -89,10 +89,11 @@
 
         os.environ.get("API_KEY")
 
-- Created an appropriate url for specific requests using TMDb instructions and API KEY
-- Requests the url using,
+- Creating an appropriate url for specific requests using TMDb instructions and API KEY [here](https://developers.themoviedb.org/3)
 
-        url = f"https://"
+- Requesting the url using,
+
+        url = f"https://.../{apikey}..."
         response = requests.get(url)
 
 - Checking for errors using try-except.
@@ -124,7 +125,7 @@
 
 ### Creating Routes
 
-- Routes are created with the help of flask and view is created by render_template function.
+- Routes are created with the help of flask and view is created by render_template function for more see flask [docs](https://flask.palletsprojects.com/en/2.2.x/)
 
         # Example route
 
@@ -138,7 +139,7 @@
 
 ### Creating JS Requests
 
-- Realtime requests are made for search suggestions and watchlist add/remove buttons using JavaScript fetch.
+- Realtime requests are made for search suggestions and watchlist add/remove buttons using JavaScript Fetch and Async Await function.
         
         /* For search suggestions */
 
@@ -162,7 +163,7 @@
 
 ### Creating User Authentication
 
-- Session configuration
+**Session configuration**
 
         app.config["SESSION_PERMANENT"] = False
         app.config["SESSION_TYPE"] = "filesystem"
@@ -174,7 +175,7 @@
 
 - User can only access signup page if not logged in.
 
-- Username and password are stored in Db when a new user signs up with a unique username by creating a new object of Users class.
+- Username and password are stored in Db when a new user signs up with a unique username, a new object of Users class is created.
 
         user = Users(username, generate_password_hash(password))
         db.session.add(user)
@@ -184,7 +185,7 @@
 
         session["user_id"] = user.id
 
-**Note**: user.id represents an object of Users class which is used to create a new row in Database with the help of SQLAlchemy ORM.
+**Note**: user represents an object of Users class which is created when user signs up.
 
 **Login**
 
@@ -207,6 +208,8 @@
         session.clear()
         return redirect("/")
 
+**Note**: Errors are displayed using flask's messasge flashing docs [here](https://flask.palletsprojects.com/en/2.2.x/patterns/flashing/)
+
 ### Creating Watchlist
 
 - Movies and Shows table are created seperately to distinguish between their actual API ids.
@@ -220,7 +223,7 @@
 
 - Shows table is similar to Movies table.
 
-- Once user is logged in, they can add/remove content from watchlist which creates new row with in either movies or shows table based on route.
+- Once user is logged in, they can add/remove content from watchlist which creates new row in either movies or shows table based on route.
 
 - Notice how above table has user_id as Foreign Key which helps determine which movies belong to which users and used to display appropriate add/remove buttons, similarly for Shows table as well.
 
@@ -228,7 +231,9 @@
 
 - Movies and shows data are requested from API and displayed using HTML with Jinja2 syntax(i.e. for looping through lists, creating if statements and so on). More [here](https://flask.palletsprojects.com/en/2.2.x/templating/).
 
-### Creating Pagination
+### Search and Pagination
+
+- Search suggestions display search response from API, without reloading the page, using JS Fetch and Async Await function.
 
 - Search results are shown within pages.
 
@@ -236,7 +241,7 @@
 
 - Pagination always shows first and last pages with dots when at middle page.
 
-- Pagination shows all the pages when number of pages is less than 5
+- Pagination shows all the pages when number of pages is less than 5.
 
 
 <br>
