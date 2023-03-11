@@ -1,5 +1,5 @@
 # AMDb 
-![](./static/All_Movie_Db.png)
+![](./static/All_Movies_Db.png)
 
 ### Browse, Search and Watchlist your favorite Movies and TV Shows    
   
