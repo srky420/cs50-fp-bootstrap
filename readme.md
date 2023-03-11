@@ -89,7 +89,7 @@
 
         os.environ.get("API_KEY")
 
-- Creating an appropriate url for specific requests using TMDb instructions and API KEY [here](https://developers.themoviedb.org/3)
+- Creating an appropriate url for specific requests using TMDb instructions and API KEY [here](https://developers.themoviedb.org/3).
 
 - Requesting the url using,
 
