@@ -9,10 +9,10 @@
         <p class="h5 p-2">Filters</p>
         <div class="">
             <form action="" method="get" class="form-control">
-                <p class="text-muted my-1">Content Type</p>
+                <p class="text-muted my-1">Sort By</p>
                 <div class="form-check form-switch form-check-inline">
                     <input class="form-check-input" type="checkbox" role="switch" id="movies-filter">
-                    <label class="form-check-label" for="movies-filter">Movies</label>
+                    <label class="form-check-label" for="movies-filter"></label>
                 </div>
                 <div class="form-check form-switch form-check-inline">
                     <input class="form-check-input" type="checkbox" role="switch" id="shows-filter" checked>
@@ -25,64 +25,95 @@
     </div>
     <!-- Search result cards -->
     <div class="container my-5 bg-body-tertiary border rounded-3 h-100 shadow">
-        <p class="h5 text-muted my-3">Search result for "{{ title }}":</p>
+        <p class="h5 text-muted my-3">Search result for "{{ title }}", page {{ response["page"] }} of {{ response["total_pages"] }}:</p>
         <!-- Filter only movies and tv shows having a poster -->
-        {% for result in response["results"] %}
-        {% if (result["media_type"] == "movie" or result["media_type"] == "tv") and result["poster_path"] %}
-        <div class="card mb-3 w-100 my-3 shadow">
-            <div class="row g-0">
-                <div class="col-4 col-md-2 col-lg-1 my-auto">
-                    {% if result["media_type"] == "movie" %}
-                    <form action="/movie/{{ result['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ result['poster_path'] }}"
-                            class="img-thumbnail rounded-start" alt="Poster">
-                    </form>
-                    {% else %}
-                    <form action="/show/{{ result['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ result['poster_path'] }}"
-                            class="img-thumbnail rounded-start" alt="Poster">
-                    </form>
-                    {% endif %}
-                </div>
-                <div class="col-8 col-md-6 col-lg-4">
-                    <div class="card-body">
-                        {% if result["title"] %}
-                        <a class="card-title h6 text-decoration-none title" href="/movie/{{ result['id'] }}"> {{ result["title"]
-                            }}</a>
-                        {% else %}
-                        <a class="card-title h6 text-decoration-none title" href="/show/{{ result['id'] }}"> {{ result["name"] }}</a>
-                        {% endif %}
-                        <p class="card-text m-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
-                                class="bi bi-star-fill" viewBox="0 2 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                            </svg> {{ "%0.1f" | format(result["vote_average"]) }}
-                        </p>
-                        <div class="card-text">
-                            <small class="text-muted">
-                                {% if result["media_type"] == "movie" %}
-                                <p class="m-0">Movie</p>
-                                {% else %}
-                                <p class="m-0">Season</p>
-                                {% endif %}
-                            </small>
-                        </div>
-                        <div class="card-text m-0">
-                            <small class="text-muted">
-                                {% if result["release_date"] %}
-                                <p>{{ result["release_date"] }}</p>
-                                {% else %}
-                                <p>{{ result["first_air_date"] }}</p>
-                                {% endif %}
-                            </small>
+        <div class="d-flex flex-row align-items-center mt-3">
+            <ul class="nav nav-tabs mx-2 w-100">
+                <li class="nav-item">
+                  <button class="nav-link active" aria-current="page" id="movies-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Movies</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" id="shows-tab" onclick="switchTabs(this, '#movies-tab', '#shows-tab', '#movies-list', '#shows-list')">Shows</button>
+                </li>
+            </ul>
+        </div>
+        <div class="" id="movies-list">
+            {% for result in response["results"] %}
+            {% if result["media_type"] == "movie" and result["poster_path"] %}
+            <div class="card mb-3 w-100 my-3 shadow">
+                <div class="row g-0">
+                    <div class="col-4 col-md-2 col-lg-1 my-auto">
+                        <form action="/movie/{{ result['id'] }}" method="get">
+                            <input type="image" src="http://image.tmdb.org/t/p/w500/{{ result['poster_path'] }}"
+                                class="img-thumbnail rounded-start" alt="Poster">
+                        </form>
+                    </div>
+                    <div class="col-8 col-md-6 col-lg-4">
+                        <div class="card-body">
+                            <a class="card-title h6 text-decoration-none title" href="/movie/{{ result['id'] }}"> {{ result["title"]
+                                }}</a>
+                            <p class="card-text m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
+                                    class="bi bi-star-fill" viewBox="0 2 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg> {{ "%0.1f" | format(result["vote_average"]) }}
+                            </p>
+                            <div class="card-text">
+                                <small class="text-muted">
+                                    <p class="m-0">Movie</p>
+                                </small>
+                            </div>
+                            <div class="card-text m-0">
+                                <small class="text-muted">
+                                    <p>{{ result["release_date"] }}</p>
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% endfor %}
         </div>
-        {% endif %}
-        {% endfor %}
+        <div class="visually-hidden" id="shows-list">
+            {% for result in response["results"] %}
+            {% if result["media_type"] == "tv" and result["poster_path"] %}
+            <div class="card mb-3 w-100 my-3 shadow">
+                <div class="row g-0">
+                    <div class="col-4 col-md-2 col-lg-1 my-auto">
+                        <form action="/show/{{ result['id'] }}" method="get">
+                            <input type="image" src="http://image.tmdb.org/t/p/w500/{{ result['poster_path'] }}"
+                                class="img-thumbnail rounded-start" alt="Poster">
+                        </form>
+                    </div>
+                    <div class="col-8 col-md-6 col-lg-4">
+                        <div class="card-body">
+                            <a class="card-title h6 text-decoration-none title" href="/show/{{ result['id'] }}"> {{ result["name"] }}</a>
+                            <p class="card-text m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold"
+                                    class="bi bi-star-fill" viewBox="0 2 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg> {{ "%0.1f" | format(result["vote_average"]) }}
+                            </p>
+                            <div class="card-text">
+                                <small class="text-muted">
+                                    <p class="m-0">Season</p>
+                                </small>
+                            </div>
+                            <div class="card-text m-0">
+                                <small class="text-muted">
+                                    <p>{{ result["first_air_date"] }}</p>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
     <!-- Pagination -->
