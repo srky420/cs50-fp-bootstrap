@@ -160,7 +160,6 @@ def movie(id):
     for vid in video:
         if vid["type"] == "Trailer":
             trailer = vid
-            print(trailer)
             break
 
     
@@ -203,7 +202,6 @@ def show(id):
     for vid in video:
         if vid["type"] == "Trailer":
             trailer = vid
-            print(trailer)
             break        
     
     # Get similar shows    

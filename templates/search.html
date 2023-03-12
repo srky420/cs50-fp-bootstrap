@@ -4,6 +4,28 @@
 
 {% block body %}
 
+    <!-- Filters -->
+    <div class="contianer my-3 bg-body-tertiary border rounded-3 h-100 shadow">
+        <p class="h5 p-2">Filters</p>
+        <div class="">
+            <form action="" method="get" class="form-control">
+                <p class="text-muted my-1">Content Type</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="filter-radios" id="movies-filter" value="{{ title }}">
+                    <label class="form-check-label" for="movies-filter">
+                      Movies
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="filter-radios" id="shows-filter" value="{{ title }}">
+                    <label class="form-check-label" for="shows-filter">
+                      TV Shows
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-outline-dark my-2">Filter</button>
+            </form>
+        </div>
+    </div>
     <!-- Search result cards -->
     <div class="container my-5 bg-body-tertiary border rounded-3 h-100 shadow">
         <p class="h5 text-muted my-3">Search result for "{{ title }}":</p>
