@@ -58,6 +58,7 @@
             </div>
         </nav>
 
+        <!-- Second navbar -->
         <nav class="navbar navbar-expand-sm bg-light border-bottom p-0">
             <div class="container">
                 <ul class="navbar-nav">
@@ -126,7 +127,6 @@
         </nav>
 
         <!-- Flashed msgs -->
-
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
@@ -142,8 +142,6 @@
         {% endwith %}
 
         <!-- Main body -->
-
-
         {% block banner %}{% endblock %}
 
         <div class="container">
@@ -192,8 +190,6 @@
             </footer>
         </div>
 
-
-        
     </body>
-
+    
 </html>

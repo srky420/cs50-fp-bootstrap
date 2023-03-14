@@ -19,8 +19,7 @@
                         </ul>
                     </div>
                     <p class="card-text mt-3 mb-0"><small class="text-muted">TV series</small></p>
-                    <p class="card-text my-0"><small class="text-muted">Release Date: {{ info["air_date"]
-                            }}</small></p>
+                    <p class="card-text my-0"><small class="text-muted">Release Date: {{ info["air_date"] }}</small></p>
                 </div>
             </div>
             <div class="col-7 col-md-4 col-lg-2">
@@ -30,9 +29,7 @@
         </div>
     </div>
 
-
     <!-- Episodes -->
-
     <div class="container my-3 p-3 bg-light-subtle border rounded-3 shadow">
         <p class="h5 mb-3">Episodes</p>
             {% for episode in info["episodes"] %}
@@ -57,4 +54,5 @@
             {% endif %}
         {% endfor %}
     </div>
+</div>
 {% endblock %}

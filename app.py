@@ -63,7 +63,6 @@ class Shows(db.Model):
         self.user_id = user_id
         
 
-
 # INDEX ROUTE
 @app.route("/")
 def index():
@@ -107,6 +106,7 @@ def index():
     added_movies = []
     added_shows = []
     
+    # Get already watchlisted content
     if len(user) == 1:
         username = user[0].username
         movies = Movies.query.filter_by(user_id = user[0].id).all()
@@ -489,7 +489,6 @@ def remove_show(id):
 @app.route("/privacypolicy")
 def privacy_policy():
     return render_template("/privacypolicy.html")
-
 
 
 # MAIN

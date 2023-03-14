@@ -3,6 +3,7 @@
 {% block title %} Index {% endblock %}
 
 {% block banner %}
+
     <!-- Carousel -->
     <div class="container my-3">
         <div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -54,10 +55,11 @@
             </button>
         </div>
     </div>
+
 {% endblock %}
 
-
 {% block body %}
+
     <!-- Trending Movies/Shows -->
     <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
         <div class="d-flex flex-row align-items-center mt-3">
@@ -91,7 +93,6 @@
                         <a class="card-title h6 text-decoration-none title" href="/movie/{{ movie['id'] }}">{{
                             movie["title"] }}</a>
                     </div>
-                    
                     {% if session["user_id"] %}
                         {% if movie["id"] not in added_movies %}
                         <form class="add-movie-form position-absolute top-0">
@@ -378,4 +379,5 @@
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
 
     <!-- Filters -->
-    <div class="contianer my-3 bg-body-tertiary border rounded-3 h-100 shadow">
+    <div class="contianer my-3 bg-body-tertiary border rounded-3 h-100 shadow visually-hidden">
         <p class="h5 p-2">Filters</p>
         <div class="">
             <form action="" method="get" class="form-control">
@@ -23,10 +23,10 @@
             </form>
         </div>
     </div>
+
     <!-- Search result cards -->
     <div class="container my-5 bg-body-tertiary border rounded-3 h-100 shadow">
         <p class="h5 text-muted my-3">Search result for "{{ title }}", page {{ response["page"] }} of {{ response["total_pages"] }}:</p>
-        <!-- Filter only movies and tv shows having a poster -->
         <div class="d-flex flex-row align-items-center mt-3">
             <ul class="nav nav-tabs mx-2 w-100">
                 <li class="nav-item">
@@ -37,6 +37,8 @@
                 </li>
             </ul>
         </div>
+
+        <!-- Filter only movies having a poster -->
         <div class="" id="movies-list">
             {% for result in response["results"] %}
             {% if result["media_type"] == "movie" and result["poster_path"] %}
@@ -76,6 +78,8 @@
             {% endif %}
             {% endfor %}
         </div>
+
+        <!-- Filter only tv shows having a poster -->
         <div class="visually-hidden" id="shows-list">
             {% for result in response["results"] %}
             {% if result["media_type"] == "tv" and result["poster_path"] %}
@@ -337,9 +341,7 @@
             <li class="page-item active"><a class="page-link" href="#">{{ response["total_pages"] }}</a></li>
 
             {% endif %}
-
             {% endif %}
-
         </ul>
     </nav>
 

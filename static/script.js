@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     input.addEventListener('input', async (e) => {
 
+        // Check if text field empty
         if (!input) return;
 
         if (input.value === '') {
@@ -151,7 +152,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // For adding shows
+    // For removing shows
     var remove_show_form = document.querySelectorAll('.remove-show-form');
 
     remove_show_form.forEach( (form) => {
@@ -179,16 +180,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 });
 
-/* If browser back button was used, flush cache */
-
-window.onpageshow = function(event) {
-    if (event.persisted) {
-        window.location.reload();
-    }
-};
-
 // Switch tabs
 function switchTabs(el, tab_id_1, tab_id_2, list_id_1, list_id_2) {
+    
     // Switch tab classes
     var movies_tab = document.querySelector(tab_id_1);
     var shows_tab = document.querySelector(tab_id_2);
