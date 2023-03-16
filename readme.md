@@ -2,7 +2,9 @@
 ![](./static/All_Movies_Db.png)
 
 ### Browse, Search and Watchlist your favorite Movies and TV Shows    
- 
+
+### [Checkout AMDb](https://srky420.pythonanywhere.com/)
+
 <br>
 
 ## Features
