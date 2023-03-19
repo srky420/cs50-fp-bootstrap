@@ -3,6 +3,8 @@
 
 ### Browse, Search and Watchlist your favorite Movies and TV Shows    
 
+### [Checkout Video Demo](https://youtu.be/JR2JwcJdGro)
+
 ### [Checkout AMDb](https://srky420.pythonanywhere.com/)
 
 <br>
