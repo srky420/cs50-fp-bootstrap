@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows, get_movie_video, get_show_video
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
+from models import *
 
 
 # App config
@@ -19,49 +20,8 @@ Session(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///allmovie.sqlite3"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
-
-# DATA MODEL
-# Users
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    movies = db.relationship("Movies", backref="user")
-
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        
-
-# Movies
-class Movies(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    movie_id = db.Column(db.Integer, nullable=False)
-    watched = db.Column(db.Boolean, nullable=False, default=False)
-    added_on = db.Column(db.Date, default=date.today())
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    
-    def __init__(self, movie_id, watched, user_id):
-        self.movie_id = movie_id
-        self.watched = watched
-        self.user_id = user_id
-        
-        
-# Movies
-class Shows(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    show_id = db.Column(db.Integer, nullable=False)
-    watched = db.Column(db.Boolean, nullable=False, default=False)
-    added_on = db.Column(db.Date, default=date.today())
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    
-    def __init__(self, show_id, watched, user_id):
-        self.show_id = show_id
-        self.watched = watched
-        self.user_id = user_id
-        
 
 # INDEX ROUTE
 @app.route("/")
