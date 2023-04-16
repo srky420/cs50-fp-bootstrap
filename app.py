@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash, session, jsonify
 from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
 from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows, get_movie_video, get_show_video
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import date
 from models import *
 
 
