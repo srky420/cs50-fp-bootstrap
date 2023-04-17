@@ -3,7 +3,9 @@ import os
 import urllib.parse
 from functools import wraps
 from flask import redirect, session, flash, request
+from dotenv import load_dotenv
 
+load_dotenv()
 
 # Login required decorator
 def login_required(f):
@@ -22,7 +24,7 @@ def trending_movies_weekly():
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/trending/movie/week?api_key={apikey}"
         response = requests.get(url)
         response.raise_for_status
@@ -38,7 +40,7 @@ def trending_shows_weekly():
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/trending/tv/week?api_key={apikey}"
         response = requests.get(url)
         response.raise_for_status
@@ -54,7 +56,7 @@ def now_playing_movies():
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/movie/now_playing?api_key={apikey}&language=en-US&page=1"
         response = requests.get(url)
         response.raise_for_status
@@ -70,7 +72,7 @@ def on_air_shows():
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/tv/on_the_air?api_key={apikey}&language=en-US&page=1"
         response = requests.get(url)
         response.raise_for_status
@@ -86,7 +88,7 @@ def get_movie(id):
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/movie/{id}?api_key={apikey}&language=en-US"
         response = requests.get(url)
         response.raise_for_status
@@ -102,7 +104,7 @@ def get_show(id):
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/tv/{id}?api_key={apikey}&language=en-US"
         response = requests.get(url)
         response.raise_for_status
@@ -118,7 +120,7 @@ def get_season(id, num):
     
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/tv/{id}/season/{num}?api_key={apikey}&language=en-US"
         response = requests.get(url)
         response.raise_for_status
@@ -134,7 +136,7 @@ def search_query(title, n):
 
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/search/multi?api_key={apikey}&query={urllib.parse.quote_plus(title)}&page={n}&language=en-US&include_adult=false"
         response = requests.get(url)
         response.raise_for_status
@@ -150,7 +152,7 @@ def get_similar_movies(id):
     
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/movie/{id}/similar?api_key={apikey}&language=en-US&include_adult=false"
         response = requests.get(url)
         response.raise_for_status
@@ -166,7 +168,7 @@ def get_similar_shows(id):
     
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/tv/{id}/similar?api_key={apikey}&language=en-US&page=1"
         response = requests.get(url)
         response.raise_for_status
@@ -181,7 +183,7 @@ def get_main_posters():
     
     # Contacting the API
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/movie/top_rated?api_key={apikey}&language=en-US&page=1"
         response = requests.get(url)
         response.raise_for_status
@@ -209,7 +211,7 @@ def parse_response(response):
 # Get videos related to the movie
 def get_movie_video(id):
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/movie/{id}/videos?api_key={apikey}&language=en-US"
         response = requests.get(url)
         response.raise_for_status
@@ -222,7 +224,7 @@ def get_movie_video(id):
 # Get videos related to the show
 def get_show_video(id):
     try:
-        apikey = os.environ.get("API_KEY")
+        apikey = os.getenv("API_KEY")
         url = f"https://api.themoviedb.org/3/tv/{id}/videos?api_key={apikey}&language=en-US"
         response = requests.get(url)
         response.raise_for_status
