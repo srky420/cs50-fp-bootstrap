@@ -21,60 +21,47 @@
 
 <br>
 
-## Requirements
-
-- flask
-- flask_session 
-- flask_sqlalchemy
-- werkzeug.security
-- requests
-- urllib.parse
-- functools
-- os
-
-<br>
-
 ## Installation
 
-1. First download and install Python 3 [here](https://www.python.org/downloads/)
+1. First download and install Python 3 [here](https://www.python.org/downloads/).
 
-    Ensure Python 3 is installed
+    Ensure Python 3 is installed,
 
         python --version
 
-2. Install pip from [here](https://pip.pypa.io/en/stable/installation/) (Note: Make sure to add Python to environment variables)
+2. Install pip from [here](https://pip.pypa.io/en/stable/installation/) (Note: Make sure to add Python to environment variables).
 
-    Ensure pip is installed
+    Ensure pip is installed,
 
         pip --version
 
-3. Use pip to install Python packages e.g. flask, flask_sqlalchemy and requests
-
-        pip install flask
-
-        pip install flask_sqlalchemy
-
-        pip install requests
-        
-4. Clone the project from GitHub repo [here](https://github.com/srky420/cs50-fp-bootstrap)
+3. Clone the project from GitHub repo [here](https://github.com/srky420/cs50-fp-bootstrap).
 
         git clone https://github.com/srky420/cs50-fp-bootstrap.git
+
+4. Create virtual environment inside projects's directory and activate it,
+
+        python -m venv venv
+
+        .\venv\Scripts\activate
+
+5. Install dependancies,
+
+        pip install -r .\requirements.txt
 
 <br>
 
 ## Usage
 
-1. Be sure to signup at TMDb [here](https://www.themoviedb.org/) and get your free API KEY
+1. Be sure to signup at TMDb [here](https://www.themoviedb.org/) and get your free API KEY.
 
-2. After receiving your API KEY, make sure to store it in an environment variable as follow
+2. Create a .env file in project's directory with API_KEY,
 
-        $env:API_KEY="<API KEY>"
+        API_KEY=...
 
-3. Run the app using
+3. Run the app using,
 
         python app.py
-
-**Note**: API KEY must be set each time you reopen the project
 
 <br>
 
@@ -91,7 +78,7 @@
 
 - Retreiving API KEY from environment variable using,
 
-        os.environ.get("API_KEY")
+        os.getenv("API_KEY")
 
 - Creating an appropriate url for specific requests using TMDb instructions and API KEY [here](https://developers.themoviedb.org/3).
 
