@@ -1,24 +1,12 @@
 from flask import Flask, render_template, request, redirect, flash, session, jsonify
 from flask_session import Session
-from helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows, get_movie_video, get_show_video
+from application.helpers import login_required, trending_movies_weekly, trending_shows_weekly, get_movie, get_show, search_query, get_similar_movies, get_similar_shows, get_main_posters, get_season, now_playing_movies, on_air_shows, get_movie_video, get_show_video
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import *
+from application import create_app, db
+from application.models import *
 
 
-# App config
-app = Flask(__name__)
-app.secret_key = "vP\x14U\x99\xb7\xa6n\x10\xb5<\x84\xcea\x96\x1dT2\x9f\xdaY\xc95k"
-
-# Session config
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-
-# SQLAlchemy config
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///allmovie.sqlite3"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db.init_app(app)
+app = create_app()
 
 
 # INDEX ROUTE
