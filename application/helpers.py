@@ -2,10 +2,8 @@ import requests
 import os
 import urllib.parse
 from functools import wraps
-from flask import redirect, session, flash, request
-from dotenv import load_dotenv
+from flask import redirect, session, flash
 
-load_dotenv()
 
 # Login required decorator
 def login_required(f):
@@ -14,9 +12,18 @@ def login_required(f):
         if session.get("user_id") is None:
             flash("Login required!", "error")
             return redirect("/login")
-        
+
         return f(*args, **kwargs)
     return decorated_function
+
+
+# Parse Reponse to JSON
+def parse_response(response):
+    try:
+        response = response.json()
+        return response
+    except (TypeError, ValueError, KeyError):
+        return None
 
 
 # Get weekly trending movies
@@ -117,7 +124,7 @@ def get_show(id):
 
 # Get season details
 def get_season(id, num):
-    
+
     # Contacting the API
     try:
         apikey = os.getenv("API_KEY")
@@ -126,7 +133,7 @@ def get_season(id, num):
         response.raise_for_status
     except requests.RequestException:
         return None
-    
+
     # Parse response
     return parse_response(response)
 
@@ -145,11 +152,11 @@ def search_query(title, n):
 
     # Parse response
     return parse_response(response)
-    
-    
+
+
 # Get similar movies
 def get_similar_movies(id):
-    
+
     # Contacting the API
     try:
         apikey = os.getenv("API_KEY")
@@ -165,7 +172,7 @@ def get_similar_movies(id):
 
 # Get similar shows
 def get_similar_shows(id):
-    
+
     # Contacting the API
     try:
         apikey = os.getenv("API_KEY")
@@ -177,10 +184,10 @@ def get_similar_shows(id):
 
     # Parse response
     return parse_response(response)
-    
-    
+
+
 def get_main_posters():
-    
+
     # Contacting the API
     try:
         apikey = os.getenv("API_KEY")
@@ -195,18 +202,9 @@ def get_main_posters():
     results = []
     for i in range(10):
         results.append(response["results"][i])
-        
+
     return results
-    
-    
-# Parse Reponse to JSON   
-def parse_response(response):
-    try:
-        response = response.json()
-        return response
-    except (TypeError, ValueError, KeyError):
-        return None
-    
+
 
 # Get videos related to the movie
 def get_movie_video(id):
@@ -217,7 +215,7 @@ def get_movie_video(id):
         response.raise_for_status
     except requests.RequestException:
         return None
-    
+
     return parse_response(response)
 
 
@@ -230,5 +228,5 @@ def get_show_video(id):
         response.raise_for_status
     except requests.RequestException:
         return None
-    
+
     return parse_response(response)

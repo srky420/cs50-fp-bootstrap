@@ -1,10 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
+from .extensions import db
 from datetime import date
 
 
-db = SQLAlchemy()
-
-# DATA MODEL
 # Users
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,7 +12,7 @@ class Users(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        
+
 
 # Movies
 class Movies(db.Model):
@@ -24,13 +21,13 @@ class Movies(db.Model):
     watched = db.Column(db.Boolean, nullable=False, default=False)
     added_on = db.Column(db.Date, default=date.today())
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    
+
     def __init__(self, movie_id, watched, user_id):
         self.movie_id = movie_id
         self.watched = watched
         self.user_id = user_id
-        
-        
+
+
 # Movies
 class Shows(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,7 +35,7 @@ class Shows(db.Model):
     watched = db.Column(db.Boolean, nullable=False, default=False)
     added_on = db.Column(db.Date, default=date.today())
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    
+
     def __init__(self, show_id, watched, user_id):
         self.show_id = show_id
         self.watched = watched
