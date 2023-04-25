@@ -1,5 +1,5 @@
 from flask import Flask
-from .extensions import db, session
+from .extensions import db, session, mail
 from .views import views
 from .auth import auth
 
@@ -25,5 +25,6 @@ def create_app(config_file='settings.py'):
     # Initialize extentions
     db.init_app(app)
     session.init_app(app)
+    mail.init_app(app)
 
     return app

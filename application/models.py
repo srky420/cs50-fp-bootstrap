@@ -5,11 +5,15 @@ from datetime import date
 # Users
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     movies = db.relationship("Movies", backref="user")
+    shows = db.relationship("Shows", backref="user")
+    is_activated = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, username, password):
+    def __init__(self, email, username, password):
+        self.email = email
         self.username = username
         self.password = password
 

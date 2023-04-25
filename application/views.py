@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, redirect, request, jsonify, flash, session
 from .extensions import db
 from .models import Users, Movies, Shows
-from application.helpers import login_required, trending_movies_weekly, trending_shows_weekly, \
+from application.api import trending_movies_weekly, trending_shows_weekly, \
     get_movie, get_show, search_query, get_similar_movies, get_similar_shows, \
     get_main_posters, get_season, now_playing_movies, on_air_shows, \
     get_movie_video, get_show_video
+from .utils import login_required
 
 
 views = Blueprint("views", __name__)
@@ -78,18 +79,18 @@ def movie(id):
     video = get_movie_video(id)
 
     # Get username
-    user = Users.query.filter_by(id=session.get("user_id")).all()
+    user = Users.query.filter_by(id=session.get("user_id")).first()
     username = ""
-    if len(user) == 1:
-        username = user[0].username
+    if user:
+        username = user.username
 
     # Check if movie is watchlisted
-    movies = Movies.query.filter_by(
-        user_id=session.get("user_id"), movie_id=id).all()
+    movie = Movies.query.filter_by(
+        user_id=session.get("user_id"), movie_id=id).first()
     is_added = False
 
     # Check if movie already in watchlist
-    if len(movies) == 1:
+    if movie:
         is_added = True
 
     # Check for exsiting movies in similar movies list
@@ -122,16 +123,16 @@ def show(id):
     # Get username
     user = Users.query.filter_by(id=session.get("user_id")).first()
     username = ""
-    if len(user) == 1:
+    if user:
         username = user.username
 
     # Check if show has been added before
-    shows = Shows.query.filter_by(
-        user_id=session.get("user_id"), show_id=id).all()
+    show = Shows.query.filter_by(
+        user_id=session.get("user_id"), show_id=id).first()
     is_added = False
 
     # Check if its on watchlist
-    if len(shows) == 1:
+    if show:
         is_added = True
 
     # Check for exsiting shows in similar shows list
