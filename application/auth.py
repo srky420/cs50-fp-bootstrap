@@ -1,8 +1,8 @@
-from flask import Blueprint, request, redirect, render_template, flash, url_for, session
+from flask import Blueprint, request, redirect, render_template, flash, url_for, session, Markup
 from .models import Users
 from werkzeug.security import check_password_hash, generate_password_hash
 from .extensions import db, mail
-from .utils import valid_email, create_email_token, get_confirmation_email
+from .utils import valid_email, send_email, create_email_token, get_confirmation_email
 from flask_mail import Message
 from os import environ
 from dotenv import load_dotenv
@@ -102,18 +102,17 @@ def signup():
         user = Users(email, username, generate_password_hash(password))
 
         # Add user to db
-        db.session.add(user)
-        db.session.commit()
+        #db.session.add(user)
+        #db.session.commit()
 
         # Send confirmation email
         token = create_email_token(email)
-        msg = Message("TMDb: Confirm Email", sender="srky420@gmail.com", recipients=[email])
-        link = url_for("auth.confirm_email", token=token, external=True)
-        msg.body = f"Please confirm you email using this link: {link}"
+        link = url_for("auth.confirm_email", token=token, _external=True)
+        html = render_template("confirmation-email.html", link=link)
 
-        mail.send(msg)
+        send_email("TMDb: Confirm Email", email, html)
 
-        flash("An email has been sent, follow the link to activate your account", "success")
+        flash(message=Markup(f"An email has been sent to {email}"), category="success")
         return redirect("/login")
 
     # GET
@@ -128,7 +127,10 @@ def signup():
 # CONFIRM EMAIL ROUTE
 @auth.route("/confirm-email/<token>")
 def confirm_email(token):
-    return get_confirmation_email(token)
+    try:
+        return get_confirmation_email(token, 30)
+    except:
+        return "Error"
 
 
 # CHANGE PASSWORD ROUTE

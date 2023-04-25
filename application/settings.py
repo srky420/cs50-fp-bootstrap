@@ -22,9 +22,10 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Mail settings
 
-MAIL_SERVER: "smtp.gmail.com"
-MAIL_PORT: 465
-MAIL_USE_TLS: False
-MAIL_USE_SSL: True
-MAIL_USERNAME: os.environ.get("EMAIL_USER")
-MAIL_PASSWORD: os.environ.get("EMAIL_PASSWORD")
+MAIL_SERVER = "smtp.gmail.com"
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = os.environ.get("EMAIL_USER")
+MAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER")
