@@ -163,7 +163,7 @@ def season(id, num, title):
     # Get username
     user = Users.query.filter_by(id=session.get("user_id")).first()
     username = ""
-    if len(user) == 1:
+    if user:
         username = user.username
 
     # Get info
@@ -179,7 +179,7 @@ def search():
     # Get username
     user = Users.query.filter_by(id=session.get("user_id")).first()
     username = ""
-    if len(user) == 1:
+    if user:
         username = user.username
 
     title = request.args.get("search")
@@ -272,7 +272,7 @@ def remove_movie(id):
         movie_id=id, user_id=session.get("user_id")).delete()
     db.session.commit()
 
-    return jsonify('Movie removed')
+    return jsonify("Movie removed")
 
 
 # ADD SHOW ROUTE

@@ -8,14 +8,15 @@ class Users(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    is_activated = db.Column(db.Boolean, nullable=False, default=False)
     movies = db.relationship("Movies", backref="user")
     shows = db.relationship("Shows", backref="user")
-    is_activated = db.Column(db.Boolean, nullable=False, default=False)
 
     def __init__(self, email, username, password):
         self.email = email
         self.username = username
         self.password = password
+        self.is_activated = False
 
 
 # Movies
