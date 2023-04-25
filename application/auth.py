@@ -21,12 +21,11 @@ def login():
         # Clear session
         session.clear()
 
-        username = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
 
         # Check for input
-        if not username or not email or not password:
+        if not email or not password:
             flash("Please provide all inputs!", "error")
             return redirect(url_for("auth.login"))
         elif not valid_email(email):
@@ -102,8 +101,8 @@ def signup():
         user = Users(email, username, generate_password_hash(password))
 
         # Add user to db
-        #db.session.add(user)
-        #db.session.commit()
+        db.session.add(user)
+        db.session.commit()
 
         # Send confirmation email
         token = create_email_token(email)
@@ -128,9 +127,24 @@ def signup():
 @auth.route("/confirm-email/<token>")
 def confirm_email(token):
     try:
-        return get_confirmation_email(token, 30)
+        # Decode token
+        email = get_confirmation_email(token, 5400)
+        
+        # Verify user
+        user = Users.query.filter_by(email=email).first()
+        if not user or user.is_activated:
+            flash("Error while verifying account!", "error")
+            return redirect("/login")
+        
+        # Activate user
+        user.is_activated = True
+        db.session.commit()
+        
+        flash(message=Markup(f"Account '{email}' has been verified!"), category="success")
+        return redirect("/login")
     except:
-        return "Error"
+        flash("Email link expired or invalid!", "error")
+        return redirect("/login")
 
 
 # CHANGE PASSWORD ROUTE
