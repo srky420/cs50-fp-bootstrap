@@ -37,7 +37,13 @@ def login():
 
         # Check if account is activated
         if user and not user.is_activated:
-            flash("Account is not activated, check confirmation link sent to your email to activate!", "error")
+            # Send confirmation email
+            token = create_email_token(email)
+            link = url_for("auth.confirm_email", token=token, _external=True)
+            html = render_template("confirmation-email.html", link=link)
+            send_email("TMDb: Confirm Email", email, html)
+
+            flash(message=Markup(f"Account not activated, an email has been sent to '{email}'"), category="neutral")
             return redirect(url_for("auth.login"))
         
         if not user or not check_password_hash(user.password, password):
@@ -111,7 +117,7 @@ def signup():
 
         send_email("TMDb: Confirm Email", email, html)
 
-        flash(message=Markup(f"An email has been sent to {email}"), category="success")
+        flash(message=Markup(f"Account confirmation link has been sent to {email}"), category="success")
         return redirect("/login")
 
     # GET
