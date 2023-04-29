@@ -86,14 +86,14 @@
 
     <!-- Seasons Cards -->
     <div class="container-fluid justify-content-evenly border bg-body-tertiary mx-auto my-3 row h-100 rounded-3 shadow">
-        <p class="h5 my-3">Seasons</p>
+        <p class="h5 mt-3">Seasons</p>
         <div class="d-flex flex-row overflow-x-scroll">
             {% for season in info["seasons"] %}
             {% if season["poster_path"] %}
             <div class="my-4">
-                <div class="card h-100 m-1 shadow" style="width: 10em;">
+                <div class="card h-100 m-1 shadow my-card">
                     <form action="/season/{{ info['id'] }}&{{ season['season_number'] }}&{{ info['name'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w1280/{{ season['poster_path'] }}" class="card-img-top" alt="Poster">
+                        <input type="image" src="http://image.tmdb.org/t/p/w1280/{{ season['poster_path'] }}" class="card-img-top my-card-img" alt="Poster">
                     </form>
                     <div class="card-body">
                         <a href="/season/{{ info['id'] }}&{{ season['season_number'] }}&{{ info['name'] }}"
@@ -114,9 +114,9 @@
             {% for show in similar_shows %}
             {% if show["id"] and show["poster_path"] %}
             <div class="my-4">
-                <div class="card h-100 m-1 border-0 shadow position-relative" style="width: 10em;">
+                <div class="card h-100 m-1 border-0 shadow position-relative my-card">
                     <form action="/show/{{ show['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top" style="height: 250px;"
+                        <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top my-card-img"
                             alt="Poster">
                     </form>
                     <div class="card-body py-1">

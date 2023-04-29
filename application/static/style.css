@@ -67,6 +67,14 @@
     background-color: darkgrey;
 }
 
+.my-card {
+    width: 10em;
+}
+
+.my-card-img {
+    height: 250px;
+}
+
 @media screen and (max-width: 768px) {
     .poster-img {
         display: none;
@@ -79,4 +87,13 @@
     .trailer {
         height: 300px;
     }
+
+    .my-card {
+        width: 8em;
+    }
+
+    .my-card-img {
+        height: 200px;
+    }
 }
+

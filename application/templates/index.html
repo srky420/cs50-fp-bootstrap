@@ -76,9 +76,9 @@
         <div class="d-flex flex-row overflow-x-scroll" id="movies-list">
             {% for movie in trending_movs %}
             <div class="my-4">
-                <div class="card border-0 h-100 m-1 shadow position-relative" style="width: 10em;">
+                <div class="card border-0 h-100 m-1 shadow position-relative my-card">
                     <form action="/movie/{{ movie['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top" style="height: 250px;"
+                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top my-card-img"
                             alt="Poster">
                     </form>
                     <div class="card-body py-1">
@@ -148,9 +148,9 @@
         <div class="d-flex flex-row overflow-x-scroll visually-hidden" id="shows-list">
             {% for show in trending_shows %}
             <div class="my-4">
-                <div class="card h-100 m-1 border-0 shadow position-relative" style="width: 10em;">
+                <div class="card h-100 m-1 border-0 shadow position-relative my-card">
                     <form action="/show/{{ show['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top" style="height: 250px;"
+                        <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top my-card-img"
                             alt="Poster">
                     </form>
                     <div class="card-body py-1">
@@ -227,9 +227,9 @@
             {% for movie in latest_movies %}  
             {% if movie != {} %}                   
             <div class="my-4">
-                <div class="card border-0 h-100 m-1 shadow position-relative" style="width: 10em;">
+                <div class="card border-0 h-100 m-1 shadow position-relative my-card">
                     <form action="/movie/{{ movie['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top" style="height: 250px;"
+                        <input type="image" src="http://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}" class="card-img-top my-card-img"
                             alt="Poster">
                     </form>
                     <div class="card-body py-1">
@@ -307,9 +307,9 @@
             {% for show in shows_on_air %}
             {% if show != {} %}
             <div class="my-4">
-                <div class="card h-100 m-1 border-0 shadow position-relative" style="width: 10em;">
+                <div class="card h-100 m-1 border-0 shadow position-relative my-card">
                     <form action="/show/{{ show['id'] }}" method="get">
-                        <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top" style="height: 250px;"
+                        <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top my-card-img"
                             alt="Poster">
                     </form>
                     <div class="card-body py-1">

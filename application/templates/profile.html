@@ -84,9 +84,9 @@
     <div class="d-flex flex-row overflow-x-scroll" id="movies-list">
         {% for movie in movies_list %}
         <div class="my-4">
-            <div class="card h-100 m-1 shadow" style="width: 10em;">
+            <div class="card h-100 m-1 shadow my-card">
                 <form action="/movie/{{ movie['id'] }}" method="get">
-                    <input type="image" src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top"
+                    <input type="image" src="http://image.tmdb.org/t/p/w342/{{ movie['poster_path'] }}" class="card-img-top my-card-img"
                         alt="Poster">
                 </form>
                 <div class="card-body py-1">
@@ -117,9 +117,9 @@
     <div class="d-flex flex-row overflow-x-scroll visually-hidden" id="shows-list">
         {% for show in shows_list %}
         <div class="my-4">
-            <div class="card h-100 m-1 shadow" style="width: 10em;">
+            <div class="card h-100 m-1 shadow my-card">
                 <form action="/show/{{ show['id'] }}" method="get">
-                    <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top"
+                    <input type="image" src="http://image.tmdb.org/t/p/w342/{{ show['poster_path'] }}" class="card-img-top my-card-img"
                         alt="Poster">
                 </form>
                 <div class="card-body py-1">
