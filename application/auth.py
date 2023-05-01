@@ -1,10 +1,8 @@
 from flask import Blueprint, request, redirect, render_template, flash, url_for, session, Markup
 from .models import Users
 from werkzeug.security import check_password_hash, generate_password_hash
-from .extensions import db, mail
+from .extensions import db
 from .utils import valid_email, send_email, create_email_token, get_confirmation_email
-from flask_mail import Message
-from os import environ
 from dotenv import load_dotenv
 
 
