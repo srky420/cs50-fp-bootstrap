@@ -55,7 +55,7 @@ def create_email_token(email):
 
 
 # Load confirmation token
-def get_confirmation_email(token, expire_time):
+def parse_email_token(token, expire_time):
     try:
         email = s.loads(token, salt=os.getenv("SECRET_SALT"), max_age=expire_time)
         return email
