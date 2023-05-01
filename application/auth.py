@@ -218,36 +218,37 @@ def forgot_password():
         # Send confirmation email
         token = create_email_token(email)
         subject = "TMDb: Reset Password"
-        link = url_for("reset-password", token=token, _external=True)
+        link = url_for("auth.reset_password", token=token, _external=True)
         html = render_template("reset-password-email.html", link=link)
 
         send_email(subject, email, html)
 
-        flash(message=f"An email to reset password is sent to {email}", category="error")
-        return redirect(url_for("login"))
+        flash(message=f"An email to reset password is sent to {email}", category="success")
+        return redirect(url_for("auth.forgot_password"))
     
     # GET 
-    return render_template("forgot-password")
+    return render_template("forgot-password.html")
 
 
 # RESET PASSWORD ROUTE
-@auth.route("reset-password/<token>", methods=["GET", "POST"])
+@auth.route("/reset-password/<token>", methods=["GET", "POST"])
 def reset_password(token):
     # Check if already logged in
     if session.get("user_id") is not None:
         flash("Already logged in!", "error")
-        return redirect("/")
+        return redirect("/") 
+    
     try:
+        # Parse token
         email = parse_email_token(token, 5400)
-
-        # POST
-        if request.method == "POST":
         
-            # Parse token
-            user = Users.query.filter_by(email=email).first()
-            if not user:
-                flash("Error changing password!", "error")
-                return redirect(url_for("login"))
+        # Check if account exists
+        user = Users.query.filter_by(email=email).first()
+        if not user:
+            flash("Error changing password!", "error")
+            return redirect(url_for("auth.login"))
+        
+        if request.method == "POST":
             
             # Check input
             password = request.form.get("password")
@@ -267,11 +268,15 @@ def reset_password(token):
             db.session.commit()
 
             flash(message=f"Password changed for {email}", category="success")
-            return redirect("login")
-
-        # GET
-        return render_template("reset-password.html")
-
+            return redirect(url_for("auth.login"))
+        
+         # GET
+        return render_template("reset-password.html", token=token)
+    
     except:
         flash("Link expired or invalid!", "error")
-        return redirect(url_for("forgot_password"))
+        return redirect(url_for("auth.forgot_password"))
+   
+
+    
+      
