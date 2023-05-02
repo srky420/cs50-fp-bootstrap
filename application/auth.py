@@ -215,6 +215,11 @@ def forgot_password():
             flash("Account does not exist!", "error")
             return redirect(request.referrer)
         
+        # Check if token already in db
+        if user.reset_token:
+            flash("Reset link already sent!", "error")
+            return redirect(request.referrer)
+
         # Send confirmation email
         token = create_email_token(email)
         subject = "TMDb: Reset Password"
@@ -222,6 +227,10 @@ def forgot_password():
         html = render_template("reset-password-email.html", link=link)
 
         send_email(subject, email, html)
+
+        # Store token in db
+        user.reset_token = token
+        db.session.commit()
 
         flash(message=f"An email to reset password is sent to {email}", category="success")
         return redirect(url_for("auth.forgot_password"))
@@ -247,7 +256,10 @@ def reset_password(token):
         if not user:
             flash("Error changing password!", "error")
             return redirect(url_for("auth.login"))
-        
+        elif not user.reset_token:
+            flash("Token not found!", "error")
+            return redirect(url_for("auth.login"))
+
         if request.method == "POST":
             
             # Check input
@@ -265,6 +277,7 @@ def reset_password(token):
                 return redirect(request.referrer)
             # Update password
             user.password = generate_password_hash(password)
+            user.reset_token = ""
             db.session.commit()
 
             flash(message=f"Password changed for {email}", category="success")
@@ -274,6 +287,9 @@ def reset_password(token):
         return render_template("reset-password.html", token=token)
     
     except:
+        user.reset_token = ""
+        db.session.commit()
+
         flash("Link expired or invalid!", "error")
         return redirect(url_for("auth.forgot_password"))
    

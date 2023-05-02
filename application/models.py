@@ -9,6 +9,7 @@ class Users(db.Model):
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     is_activated = db.Column(db.Boolean, nullable=False, default=False)
+    reset_token = db.Column(db.String(200), nullable=True, default="")
     movies = db.relationship("Movies", backref="user")
     shows = db.relationship("Shows", backref="user")
 
